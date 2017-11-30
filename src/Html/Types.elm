@@ -115,15 +115,19 @@ attributeToHtml attribute =
 
 
 toString : Int -> Html msg -> String
-toString indent html =
-    if indent == 0 then
-        toStringHelper 0 html |> String.join ""
+toString depth html =
+    if depth == 0 then
+        toStringHelper identity html |> String.join ""
     else
-        toStringHelper indent html |> String.join "\n"
+        toStringHelper (indent depth) html |> String.join "\n"
 
 
-toStringHelper : Int -> Html msg -> List String
-toStringHelper spaces html =
+type alias Indenter =
+    List String -> List String
+
+
+toStringHelper : Indenter -> Html msg -> List String
+toStringHelper indent html =
     case html of
         Node tagName attributes children ->
             case children of
@@ -132,12 +136,12 @@ toStringHelper spaces html =
 
                 Regular children ->
                     tag tagName attributes
-                        :: List.concatMap (toStringHelper spaces >> indent spaces) children
+                        :: List.concatMap (toStringHelper indent >> indent) children
                         ++ [ closingTag tagName ]
 
                 Keyed children ->
                     tag tagName attributes
-                        :: List.concatMap (Tuple.second >> toStringHelper spaces >> indent spaces) children
+                        :: List.concatMap (Tuple.second >> toStringHelper indent >> indent) children
                         ++ [ closingTag tagName ]
 
         TextNode string ->
