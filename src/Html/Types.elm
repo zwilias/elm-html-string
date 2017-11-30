@@ -1,7 +1,6 @@
 module Html.Types exposing (..)
 
 import Char
-import Dict exposing (Dict)
 import Html
 import Html.Attributes
 import Html.Events
@@ -150,22 +149,23 @@ tag tagName attributes =
     "<" ++ String.join " " (tagName :: List.filterMap attributeToString attributes) ++ ">"
 
 
-specialProperties : Dict String String
-specialProperties =
-    Dict.fromList
-        [ ( "className", "class" )
-        , ( "defaultValue", "value" )
-        , ( "htmlFor", "for" )
-        ]
-
-
 attributeToString : Attribute msg -> Maybe String
 attributeToString attribute =
     let
         propName : String -> String
-        propName string =
-            Dict.get string specialProperties
-                |> Maybe.withDefault string
+        propName prop =
+            case prop of
+                "className" ->
+                    "class"
+
+                "defaultValue" ->
+                    "value"
+
+                "htmlFor" ->
+                    "for"
+
+                _ ->
+                    prop
 
         build : String -> String -> String
         build key value =
