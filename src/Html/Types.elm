@@ -116,36 +116,93 @@ attributeToHtml attribute =
 
 toString : Int -> Html msg -> String
 toString depth html =
-    if depth == 0 then
-        toStringHelper identity html |> String.join ""
-    else
-        toStringHelper (indent depth) html |> String.join "\n"
+    let
+        indenter : Indenter
+        indenter =
+            case depth of
+                0 ->
+                    always identity
+
+                _ ->
+                    indent depth
+
+        joinString : String
+        joinString =
+            case depth of
+                0 ->
+                    ""
+
+                _ ->
+                    "\n"
+
+        initialAcc : Acc msg
+        initialAcc =
+            { depth = 0
+            , stack = []
+            , result = []
+            }
+    in
+    toStringHelper indenter [ html ] initialAcc |> .result |> String.join joinString
 
 
 type alias Indenter =
-    List String -> List String
+    Int -> String -> String
 
 
-toStringHelper : Indenter -> Html msg -> List String
-toStringHelper indent html =
-    case html of
-        Node tagName attributes children ->
+type alias Acc msg =
+    { depth : Int, stack : List (TagInfo msg), result : List String }
+
+
+type alias TagInfo msg =
+    ( String, List (Attribute msg), List (Html msg) )
+
+
+rmap : (a -> b) -> List a -> List b
+rmap f xs =
+    List.foldl (\x acc -> f x :: acc) [] xs
+
+
+toStringHelper : Indenter -> List (Html msg) -> Acc msg -> Acc msg
+toStringHelper indenter tags acc =
+    case tags of
+        [] ->
+            case acc.stack of
+                [] ->
+                    acc
+
+                ( tagName, attributes, cont ) :: rest ->
+                    { acc
+                        | result = indenter (acc.depth - 1) (tag tagName attributes) :: acc.result
+                        , depth = acc.depth - 1
+                        , stack = rest
+                    }
+                        |> toStringHelper indenter cont
+
+        (Node tagName attributes children) :: rest ->
             case children of
                 NoChildren ->
-                    [ tag tagName attributes ]
+                    { acc | result = indenter acc.depth (tag tagName attributes) :: acc.result }
+                        |> toStringHelper indenter rest
 
-                Regular children ->
-                    tag tagName attributes
-                        :: List.concatMap (toStringHelper indent >> indent) children
-                        ++ [ closingTag tagName ]
+                Regular childNodes ->
+                    { acc
+                        | result = indenter acc.depth (closingTag tagName) :: acc.result
+                        , depth = acc.depth + 1
+                        , stack = ( tagName, attributes, rest ) :: acc.stack
+                    }
+                        |> toStringHelper indenter (List.reverse childNodes)
 
-                Keyed children ->
-                    tag tagName attributes
-                        :: List.concatMap (Tuple.second >> toStringHelper indent >> indent) children
-                        ++ [ closingTag tagName ]
+                Keyed childNodes ->
+                    { acc
+                        | result = indenter acc.depth (closingTag tagName) :: acc.result
+                        , depth = acc.depth + 1
+                        , stack = ( tagName, attributes, rest ) :: acc.stack
+                    }
+                        |> toStringHelper indenter (rmap Tuple.second childNodes)
 
-        TextNode string ->
-            [ string ]
+        (TextNode string) :: rest ->
+            { acc | result = indenter acc.depth string :: acc.result }
+                |> toStringHelper indenter rest
 
 
 tag : String -> List (Attribute msg) -> String
@@ -227,6 +284,6 @@ closingTag tagName =
     "</" ++ tagName ++ ">"
 
 
-indent : Int -> List String -> List String
-indent level =
-    List.map ((++) <| String.repeat level " ")
+indent : Int -> Int -> String -> String
+indent perLevel level =
+    (++) <| String.repeat (perLevel * level) " "
