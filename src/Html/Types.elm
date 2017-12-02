@@ -142,7 +142,22 @@ toString depth html =
             , result = []
             }
     in
-    toStringHelper indenter [ html ] initialAcc |> .result |> String.join joinString
+        toStringHelper indenter [ html ] initialAcc
+            |> .result
+            |> join joinString
+
+
+join : String -> List String -> String
+join between list =
+    case list of
+        [] ->
+            ""
+
+        [ x ] ->
+            x
+
+        x :: xs ->
+            List.foldl (\y acc -> y ++ between ++ acc) x xs
 
 
 type alias Indenter =
@@ -150,16 +165,14 @@ type alias Indenter =
 
 
 type alias Acc msg =
-    { depth : Int, stack : List (TagInfo msg), result : List String }
+    { depth : Int
+    , stack : List (TagInfo msg)
+    , result : List String
+    }
 
 
 type alias TagInfo msg =
-    ( String, List (Attribute msg), List (Html msg) )
-
-
-rmap : (a -> b) -> List a -> List b
-rmap f xs =
-    List.foldl (\x acc -> f x :: acc) [] xs
+    ( String, List (Html msg) )
 
 
 toStringHelper : Indenter -> List (Html msg) -> Acc msg -> Acc msg
@@ -170,9 +183,9 @@ toStringHelper indenter tags acc =
                 [] ->
                     acc
 
-                ( tagName, attributes, cont ) :: rest ->
+                ( tagName, cont ) :: rest ->
                     { acc
-                        | result = indenter (acc.depth - 1) (tag tagName attributes) :: acc.result
+                        | result = indenter (acc.depth - 1) (closingTag tagName) :: acc.result
                         , depth = acc.depth - 1
                         , stack = rest
                     }
@@ -186,19 +199,19 @@ toStringHelper indenter tags acc =
 
                 Regular childNodes ->
                     { acc
-                        | result = indenter acc.depth (closingTag tagName) :: acc.result
+                        | result = indenter acc.depth (tag tagName attributes) :: acc.result
                         , depth = acc.depth + 1
-                        , stack = ( tagName, attributes, rest ) :: acc.stack
+                        , stack = ( tagName, rest ) :: acc.stack
                     }
-                        |> toStringHelper indenter (List.reverse childNodes)
+                        |> toStringHelper indenter childNodes
 
                 Keyed childNodes ->
                     { acc
-                        | result = indenter acc.depth (closingTag tagName) :: acc.result
+                        | result = indenter acc.depth (tag tagName attributes) :: acc.result
                         , depth = acc.depth + 1
-                        , stack = ( tagName, attributes, rest ) :: acc.stack
+                        , stack = ( tagName, rest ) :: acc.stack
                     }
-                        |> toStringHelper indenter (rmap Tuple.second childNodes)
+                        |> toStringHelper indenter (List.map Tuple.second childNodes)
 
         (TextNode string) :: rest ->
             { acc | result = indenter acc.depth string :: acc.result }
@@ -210,34 +223,35 @@ tag tagName attributes =
     "<" ++ String.join " " (tagName :: List.filterMap attributeToString attributes) ++ ">"
 
 
+propName : String -> String
+propName prop =
+    case prop of
+        "className" ->
+            "class"
+
+        "defaultValue" ->
+            "value"
+
+        "htmlFor" ->
+            "for"
+
+        _ ->
+            prop
+
+
+buildProp : String -> String -> String
+buildProp key value =
+    hyphenate key ++ "=\"" ++ escape value ++ "\""
+
+
 attributeToString : Attribute msg -> Maybe String
 attributeToString attribute =
-    let
-        propName : String -> String
-        propName prop =
-            case prop of
-                "className" ->
-                    "class"
-
-                "defaultValue" ->
-                    "value"
-
-                "htmlFor" ->
-                    "for"
-
-                _ ->
-                    prop
-
-        build : String -> String -> String
-        build key value =
-            hyphenate key ++ "=\"" ++ escape value ++ "\""
-    in
     case attribute of
         Attribute key value ->
-            Just <| build key value
+            Just <| buildProp key value
 
         StringProperty string value ->
-            Just <| build (propName string) value
+            Just <| buildProp (propName string) value
 
         BoolProperty string enabled ->
             if enabled then
@@ -246,7 +260,7 @@ attributeToString attribute =
                 Nothing
 
         ValueProperty string value ->
-            Just <| build (propName string) (Basics.toString value)
+            Just <| buildProp (propName string) (Basics.toString value)
 
         Style styles ->
             Just <| "style=\"" ++ String.join "; " (List.map (\( key, value ) -> key ++ ": " ++ value) styles) ++ "\""
@@ -285,5 +299,5 @@ closingTag tagName =
 
 
 indent : Int -> Int -> String -> String
-indent perLevel level =
-    (++) <| String.repeat (perLevel * level) " "
+indent perLevel level x =
+    String.repeat (perLevel * level) " " ++ x
