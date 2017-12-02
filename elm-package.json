@@ -1,5 +1,5 @@
 {
-    "version": "1.0.1",
+    "version": "1.0.2",
     "summary": "A drop-in elm-lang/html replacement that can stringify to a pretty HTML string",
     "repository": "https://github.com/zwilias/elm-html-string.git",
     "license": "BSD3",
