@@ -1,5 +1,6 @@
 module Html.Types exposing (Acc, Attribute(..), Children(..), Html(..), Indenter, TagInfo, attributeToHtml, attributeToString, buildProp, closingTag, escape, hyphenate, indent, join, map, mapAttribute, mapChildren, propName, tag, toHtml, toString, toStringHelper)
 
+import Basics exposing ((<|))
 import Char
 import Html
 import Html.Attributes
@@ -36,8 +37,8 @@ type Html msg
 map : (a -> b) -> Html a -> Html b
 map f node =
     case node of
-        Node tag attrs children ->
-            Node tag (List.map (mapAttribute f) attrs) (mapChildren f children)
+        Node tagName attrs children ->
+            Node tagName (List.map (mapAttribute f) attrs) (mapChildren f children)
 
         TextNode content ->
             TextNode content
@@ -48,8 +49,8 @@ type Attribute msg
     | StringProperty String String
     | BoolProperty String Bool
     | ValueProperty String Value
-    | Style (List ( String, String ))
-    | Event String { preventDefault : Bool, stopPropagation : Bool } (Decoder msg)
+    | Style String String
+    | Event String (Decoder { message : msg, preventDefault : Bool, stopPropagation : Bool })
 
 
 mapAttribute : (a -> b) -> Attribute a -> Attribute b
@@ -67,26 +68,25 @@ mapAttribute f attribute =
         ValueProperty key value ->
             ValueProperty key value
 
-        Style styles ->
-            Style styles
+        Style key value ->
+            Style key value
 
-        Event name options msgDecoder ->
-            Event name options (Json.Decode.map f msgDecoder)
-
+        Event name decoder ->
+            Event name (Json.Decode.map f decoder)
 
 toHtml : Html msg -> Html.Html msg
 toHtml node =
     case node of
-        Node tag attributes children ->
+        Node tagName attributes children ->
             case children of
                 NoChildren ->
-                    Html.node tag (List.map attributeToHtml attributes) []
+                    Html.node tagName (List.map attributeToHtml attributes) []
 
                 Regular nodes ->
-                    Html.node tag (List.map attributeToHtml attributes) (List.map toHtml nodes)
+                    Html.node tagName (List.map attributeToHtml attributes) (List.map toHtml nodes)
 
                 Keyed keyedNodes ->
-                    Html.Keyed.node tag (List.map attributeToHtml attributes) (List.map (Tuple.mapSecond toHtml) keyedNodes)
+                    Html.Keyed.node tagName (List.map attributeToHtml attributes) (List.map (Tuple.mapSecond toHtml) keyedNodes)
 
         TextNode content ->
             Html.text content
@@ -107,11 +107,11 @@ attributeToHtml attribute =
         ValueProperty key value ->
             Html.Attributes.property key value
 
-        Style styles ->
-            Html.Attributes.style styles
+        Style key value ->
+            Html.Attributes.style key value
 
-        Event name options decoder ->
-            Html.Events.onWithOptions name options decoder
+        Event name decoder ->
+            Html.Events.custom name decoder
 
 
 toString : Int -> Html msg -> String
@@ -260,12 +260,12 @@ attributeToString attribute =
                 Nothing
 
         ValueProperty string value ->
-            Just <| buildProp (propName string) (Basics.toString value)
+            Just <| buildProp (propName string) (Debug.toString value)
 
-        Style styles ->
-            Just <| "style=\"" ++ String.join "; " (List.map (\( key, value ) -> key ++ ": " ++ value) styles) ++ "\""
+        Style key value ->
+            Just <| "style=\"" ++ key ++ ": " ++ value ++ ";\""
 
-        Event string record msgDecoder ->
+        Event string msgDecoder ->
             Nothing
 
 
