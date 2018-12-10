@@ -1,9 +1,4 @@
-module Html.String.Lazy
-    exposing
-        ( lazy
-        , lazy2
-        , lazy3
-        )
+module Html.String.Lazy exposing (lazy, lazy2, lazy3)
 
 {-|
 

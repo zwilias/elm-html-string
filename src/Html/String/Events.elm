@@ -1,25 +1,25 @@
 module Html.String.Events
     exposing
-        ( Options
-        , defaultOptions
-        , keyCode
-        , on
-        , onBlur
-        , onCheck
-        , onClick
+        ( onClick
         , onDoubleClick
-        , onFocus
-        , onInput
         , onMouseDown
+        , onMouseUp
         , onMouseEnter
         , onMouseLeave
-        , onMouseOut
         , onMouseOver
-        , onMouseUp
+        , onMouseOut
+        , onInput
+        , onCheck
         , onSubmit
+        , onBlur
+        , onFocus
+        , on
         , onWithOptions
-        , targetChecked
+        , Options
+        , defaultOptions
         , targetValue
+        , targetChecked
+        , keyCode
         )
 
 {-| It is often helpful to create an [Union Type] so you can have many different kinds
@@ -31,7 +31,7 @@ of events as seen in the [TodoMVC] example.
 
 # Mouse Helpers
 
-@docs onClick, onDoubleClick,onMouseDown, onMouseUp,onMouseEnter, onMouseLeave,onMouseOver, onMouseOut
+@docs onClick, onDoubleClick, onMouseDown, onMouseUp, onMouseEnter, onMouseLeave, onMouseOver, onMouseOut
 
 
 # Form Helpers

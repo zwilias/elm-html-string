@@ -1,4 +1,4 @@
-module Html.Types exposing (..)
+module Html.Types exposing (Acc, Attribute(..), Children(..), Html(..), Indenter, TagInfo, attributeToHtml, attributeToString, buildProp, closingTag, escape, hyphenate, indent, join, map, mapAttribute, mapChildren, propName, tag, toHtml, toString, toStringHelper)
 
 import Char
 import Html

@@ -1,113 +1,113 @@
 module Html.String
     exposing
-        ( Attribute
+        ( toHtml
+        , toString
         , Html
-        , a
-        , abbr
-        , address
-        , article
-        , aside
-        , audio
-        , b
-        , bdi
-        , bdo
+        , Attribute
+        , text
+        , node
+        , map
         , beginnerProgram
-        , blockquote
-        , body
-        , br
-        , button
-        , canvas
-        , caption
-        , cite
-        , code
-        , col
-        , colgroup
-        , datalist
-        , dd
-        , del
-        , details
-        , dfn
-        , div
-        , dl
-        , dt
-        , em
-        , embed
-        , fieldset
-        , figcaption
-        , figure
-        , footer
-        , form
+        , program
+        , programWithFlags
         , h1
         , h2
         , h3
         , h4
         , h5
         , h6
-        , header
-        , hr
-        , i
-        , iframe
-        , img
-        , input
-        , ins
-        , kbd
-        , keygen
-        , label
-        , legend
-        , li
-        , main_
-        , map
-        , mark
-        , math
-        , menu
-        , menuitem
-        , meter
-        , nav
-        , node
-        , object
-        , ol
-        , optgroup
-        , option
-        , output
+        , div
         , p
-        , param
+        , hr
         , pre
-        , program
-        , programWithFlags
-        , progress
-        , q
-        , rp
-        , rt
-        , ruby
-        , s
-        , samp
-        , section
-        , select
-        , small
-        , source
+        , blockquote
         , span
+        , a
+        , code
+        , em
         , strong
-        , sub
-        , summary
-        , sup
-        , table
-        , tbody
-        , td
-        , text
-        , textarea
-        , tfoot
-        , th
-        , thead
-        , time
-        , toHtml
-        , toString
-        , tr
-        , track
+        , i
+        , b
         , u
+        , sub
+        , sup
+        , br
+        , ol
         , ul
-        , var
+        , li
+        , dl
+        , dt
+        , dd
+        , img
+        , iframe
+        , canvas
+        , math
+        , form
+        , input
+        , textarea
+        , button
+        , select
+        , option
+        , section
+        , nav
+        , article
+        , aside
+        , header
+        , footer
+        , address
+        , main_
+        , body
+        , figure
+        , figcaption
+        , table
+        , caption
+        , colgroup
+        , col
+        , tbody
+        , thead
+        , tfoot
+        , tr
+        , td
+        , th
+        , fieldset
+        , legend
+        , label
+        , datalist
+        , optgroup
+        , keygen
+        , output
+        , progress
+        , meter
+        , audio
         , video
+        , source
+        , track
+        , embed
+        , object
+        , param
+        , ins
+        , del
+        , small
+        , cite
+        , dfn
+        , abbr
+        , time
+        , var
+        , samp
+        , kbd
+        , s
+        , q
+        , mark
+        , ruby
+        , rt
+        , rp
+        , bdi
+        , bdo
         , wbr
+        , details
+        , summary
+        , menuitem
+        , menu
         )
 
 {-| This file is organized roughly in order of popularity. The tags which you'd
@@ -353,8 +353,15 @@ beginnerProgram :
     -> Program Never model msg
 beginnerProgram { model, view, update } =
     program
-        { init = model ! []
-        , update = \msg model -> update msg model ! []
+        { init =
+            ( model
+            , Cmd.none
+            )
+        , update =
+            \msg model ->
+                ( update msg model
+                , Cmd.none
+                )
         , view = view
         , subscriptions = \_ -> Sub.none
         }

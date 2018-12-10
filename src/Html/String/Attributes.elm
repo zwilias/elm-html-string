@@ -1,104 +1,104 @@
 module Html.String.Attributes
     exposing
-        ( accept
-        , acceptCharset
-        , accesskey
-        , action
-        , align
-        , alt
-        , async
+        ( style
+        , property
         , attribute
-        , autocomplete
-        , autofocus
-        , autoplay
-        , challenge
-        , charset
-        , checked
-        , cite
+        , map
         , class
         , classList
-        , cols
-        , colspan
-        , content
-        , contenteditable
-        , contextmenu
-        , controls
-        , coords
-        , datetime
-        , default
-        , defaultValue
-        , defer
-        , dir
-        , disabled
-        , download
-        , downloadAs
-        , draggable
-        , dropzone
-        , enctype
-        , for
-        , form
-        , formaction
-        , headers
-        , height
-        , hidden
-        , href
-        , hreflang
-        , httpEquiv
         , id
-        , ismap
-        , itemprop
-        , keytype
-        , kind
-        , lang
-        , language
+        , title
+        , hidden
+        , type_
+        , value
+        , defaultValue
+        , checked
+        , placeholder
+        , selected
+        , accept
+        , acceptCharset
+        , action
+        , autocomplete
+        , autofocus
+        , disabled
+        , enctype
+        , formaction
         , list
-        , loop
-        , manifest
-        , map
-        , max
         , maxlength
-        , media
-        , method
-        , min
         , minlength
+        , method
         , multiple
         , name
         , novalidate
         , pattern
-        , ping
-        , placeholder
-        , poster
-        , preload
-        , property
-        , pubdate
         , readonly
-        , rel
         , required
-        , reversed
-        , rows
-        , rowspan
-        , sandbox
-        , scope
-        , scoped
-        , seamless
-        , selected
-        , shape
         , size
-        , spellcheck
-        , src
-        , srcdoc
-        , srclang
-        , start
+        , for
+        , form
+        , max
+        , min
         , step
-        , style
-        , tabindex
-        , target
-        , title
-        , type_
-        , usemap
-        , value
-        , width
+        , cols
+        , rows
         , wrap
+        , href
+        , target
+        , download
+        , downloadAs
+        , hreflang
+        , media
+        , ping
+        , rel
+        , ismap
+        , usemap
+        , shape
+        , coords
+        , src
+        , height
+        , width
+        , alt
+        , autoplay
+        , controls
+        , loop
+        , preload
+        , poster
+        , default
+        , kind
+        , srclang
+        , sandbox
+        , seamless
+        , srcdoc
+        , reversed
+        , start
+        , align
+        , colspan
+        , rowspan
+        , headers
+        , scope
+        , async
+        , charset
+        , content
+        , defer
+        , httpEquiv
+        , language
+        , scoped
+        , accesskey
+        , contenteditable
+        , contextmenu
+        , dir
+        , draggable
+        , dropzone
+        , itemprop
+        , lang
+        , spellcheck
+        , tabindex
+        , challenge
+        , keytype
+        , cite
+        , datetime
+        , pubdate
+        , manifest
         )
 
 {-| Helper functions for HTML attributes. They are organized roughly by
@@ -126,7 +126,7 @@ Attributes](#custom-attributes) section to learn how to create new helpers.
 
 ## Input Helpers
 
-@docs accept, acceptCharset, action, autocomplete, autofocus,disabled, enctype, formaction, list, maxlength, minlength, method, multiple,name, novalidate, pattern, readonly, required, size, for, form
+@docs accept, acceptCharset, action, autocomplete, autofocus, disabled, enctype, formaction, list, maxlength, minlength, method, multiple, name, novalidate, pattern, readonly, required, size, for, form
 
 
 ## Input Ranges
@@ -182,7 +182,8 @@ Attributes](#custom-attributes) section to learn how to create new helpers.
 # Less Common Global Attributes
 
 Attributes that can be attached to any HTML tag but are less commonly used.
-@docs accesskey, contenteditable, contextmenu, dir, draggable, dropzone,itemprop, lang, spellcheck, tabindex
+
+@docs accesskey, contenteditable, contextmenu, dir, draggable, dropzone, itemprop, lang, spellcheck, tabindex
 
 
 # Key Generation
@@ -250,7 +251,7 @@ classList list =
         |> class
 
 
-{-| Create _properties_, like saying `domNode.className = 'greeting'` in
+{-| Create *properties*, like saying `domNode.className = 'greeting'` in
 JavaScript.
 
     import Json.Encode as Encode
@@ -279,7 +280,7 @@ boolProperty =
     Html.Types.BoolProperty
 
 
-{-| Create _attributes_, like saying `domNode.setAttribute('class', 'greeting')`
+{-| Create *attributes*, like saying `domNode.setAttribute('class', 'greeting')`
 in JavaScript.
 
     class : String -> Attribute msg
@@ -409,7 +410,7 @@ instead.
 -}
 tabindex : Int -> Attribute msg
 tabindex n =
-    attribute "tabIndex" (toString n)
+    attribute "tabIndex" (String.fromInt n)
 
 
 
@@ -493,7 +494,7 @@ src value =
 -}
 height : Int -> Attribute msg
 height value =
-    attribute "height" (toString value)
+    attribute "height" (String.fromInt value)
 
 
 {-| Declare the width of a `canvas`, `embed`, `iframe`, `img`, `input`,
@@ -501,7 +502,7 @@ height value =
 -}
 width : Int -> Attribute msg
 width value =
-    attribute "width" (toString value)
+    attribute "width" (String.fromInt value)
 
 
 {-| Alternative text in case an image can't be displayed. Works with `img`,
@@ -750,7 +751,7 @@ list value =
 -}
 minlength : Int -> Attribute msg
 minlength n =
-    attribute "minLength" (toString n)
+    attribute "minLength" (String.fromInt n)
 
 
 {-| Defines the maximum number of characters allowed in an `input` or
@@ -758,7 +759,7 @@ minlength n =
 -}
 maxlength : Int -> Attribute msg
 maxlength n =
-    attribute "maxlength" (toString n)
+    attribute "maxlength" (String.fromInt n)
 
 
 {-| Defines which HTTP method to use when submitting a `form`. Can be GET
@@ -824,7 +825,7 @@ For `select` specifies the number of visible options in a drop-down list.
 -}
 size : Int -> Attribute msg
 size n =
-    attribute "size" (toString n)
+    attribute "size" (String.fromInt n)
 
 
 {-| The element ID described by this `label` or the element IDs that are used
@@ -880,14 +881,14 @@ step n =
 -}
 cols : Int -> Attribute msg
 cols n =
-    attribute "cols" (toString n)
+    attribute "cols" (String.fromInt n)
 
 
 {-| Defines the number of rows in a `textarea`.
 -}
 rows : Int -> Attribute msg
 rows n =
-    attribute "rows" (toString n)
+    attribute "rows" (String.fromInt n)
 
 
 {-| Indicates whether the text should be wrapped in a `textarea`. Possible
@@ -1088,7 +1089,7 @@ besides 1.
 -}
 start : Int -> Attribute msg
 start n =
-    stringProperty "start" (toString n)
+    stringProperty "start" (String.fromInt n)
 
 
 
@@ -1100,7 +1101,7 @@ For `td` and `th`.
 -}
 colspan : Int -> Attribute msg
 colspan n =
-    attribute "colspan" (toString n)
+    attribute "colspan" (String.fromInt n)
 
 
 {-| A space separated list of element IDs indicating which `th` elements are
@@ -1116,7 +1117,7 @@ For `td` and `th`.
 -}
 rowspan : Int -> Attribute msg
 rowspan n =
-    attribute "rowspan" (toString n)
+    attribute "rowspan" (String.fromInt n)
 
 
 {-| Specifies the scope of a header cell `th`. Possible values are: col, row,
