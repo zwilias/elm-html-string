@@ -1,4 +1,11 @@
-module Tests exposing (attributes, cases, classList, eventsAreStripped, indentedOutput, nestedIndentation, styles, testCase, testCases)
+module Tests exposing
+    ( attributes
+    , classList
+    , eventsAreStripped
+    , indentedOutput
+    , nestedIndentation
+    , testCases
+    )
 
 import Expect exposing (Expectation)
 import Html.String as Html exposing (Html)
