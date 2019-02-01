@@ -62,18 +62,19 @@ attributes =
                 |> Expect.equal "<input value=\"hello\" placeholder=\"hold my place\">"
 
 
-styles : Test
-styles =
-    skip <|
-        test "styles are serialized to proper css. Sorta." <|
-            \_ ->
-                Html.span
-                    [ Attr.style "line-height" "12px"
-                    , Attr.style "color" "black"
-                    ]
-                    []
-                    |> Html.toString 0
-                    |> Expect.equal "<span style=\"line-height: 12px; color: black\"></span>"
+
+{- styles : Test
+   styles =
+           test "styles are serialized to proper css. Sorta." <|
+               \_ ->
+                   Html.span
+                       [ Attr.style "line-height" "12px"
+                       , Attr.style "color" "black"
+                       ]
+                       []
+                       |> Html.toString 0
+                       |> Expect.equal "<span style=\"line-height: 12px; color: black\"></span>"
+-}
 
 
 classList : Test
