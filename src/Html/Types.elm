@@ -1,4 +1,4 @@
-module Html.Types exposing (..)
+module Html.Types exposing (Acc, Attribute(..), Children(..), Html(..), Indenter, TagInfo, attributeToHtml, attributeToString, buildProp, closingTag, escape, hyphenate, indent, join, map, mapAttribute, mapChildren, propName, tag, toHtml, toString, toStringHelper)
 
 import Char
 import Html
@@ -7,6 +7,7 @@ import Html.Events
 import Html.Keyed
 import Json.Decode exposing (Decoder, Value)
 import Json.Encode as Encode
+import String.Conversions
 
 
 type Children msg
@@ -36,8 +37,8 @@ type Html msg
 map : (a -> b) -> Html a -> Html b
 map f node =
     case node of
-        Node tag attrs children ->
-            Node tag (List.map (mapAttribute f) attrs) (mapChildren f children)
+        Node tagName attrs children ->
+            Node tagName (List.map (mapAttribute f) attrs) (mapChildren f children)
 
         TextNode content ->
             TextNode content
@@ -48,7 +49,7 @@ type Attribute msg
     | StringProperty String String
     | BoolProperty String Bool
     | ValueProperty String Value
-    | Style (List ( String, String ))
+    | Style String String
     | Event String { preventDefault : Bool, stopPropagation : Bool } (Decoder msg)
 
 
@@ -67,8 +68,8 @@ mapAttribute f attribute =
         ValueProperty key value ->
             ValueProperty key value
 
-        Style styles ->
-            Style styles
+        Style key value ->
+            Style key value
 
         Event name options msgDecoder ->
             Event name options (Json.Decode.map f msgDecoder)
@@ -77,16 +78,16 @@ mapAttribute f attribute =
 toHtml : Html msg -> Html.Html msg
 toHtml node =
     case node of
-        Node tag attributes children ->
+        Node tagName attributes children ->
             case children of
                 NoChildren ->
-                    Html.node tag (List.map attributeToHtml attributes) []
+                    Html.node tagName (List.map attributeToHtml attributes) []
 
                 Regular nodes ->
-                    Html.node tag (List.map attributeToHtml attributes) (List.map toHtml nodes)
+                    Html.node tagName (List.map attributeToHtml attributes) (List.map toHtml nodes)
 
                 Keyed keyedNodes ->
-                    Html.Keyed.node tag (List.map attributeToHtml attributes) (List.map (Tuple.mapSecond toHtml) keyedNodes)
+                    Html.Keyed.node tagName (List.map attributeToHtml attributes) (List.map (Tuple.mapSecond toHtml) keyedNodes)
 
         TextNode content ->
             Html.text content
@@ -107,11 +108,11 @@ attributeToHtml attribute =
         ValueProperty key value ->
             Html.Attributes.property key value
 
-        Style styles ->
-            Html.Attributes.style styles
+        Style key value ->
+            Html.Attributes.style key value
 
         Event name options decoder ->
-            Html.Events.onWithOptions name options decoder
+            Html.Events.custom name (decoder |> Json.Decode.andThen (\msg -> Json.Decode.succeed { message = msg, stopPropagation=options.stopPropagation, preventDefault = options.preventDefault}))
 
 
 toString : Int -> Html msg -> String
@@ -142,9 +143,9 @@ toString depth html =
             , result = []
             }
     in
-        toStringHelper indenter [ html ] initialAcc
-            |> .result
-            |> join joinString
+    toStringHelper indenter [ html ] initialAcc
+        |> .result
+        |> join joinString
 
 
 join : String -> List String -> String
@@ -256,14 +257,15 @@ attributeToString attribute =
         BoolProperty string enabled ->
             if enabled then
                 Just <| hyphenate <| propName string
+
             else
                 Nothing
 
         ValueProperty string value ->
-            Just <| buildProp (propName string) (Basics.toString value)
+            Just <| buildProp (propName string) (String.Conversions.fromValue value)
 
-        Style styles ->
-            Just <| "style=\"" ++ String.join "; " (List.map (\( key, value ) -> key ++ ": " ++ value) styles) ++ "\""
+        Style key value ->
+            Just <| "style=\"" ++ key ++ ": " ++ value  ++ ";\""
 
         Event string record msgDecoder ->
             Nothing
@@ -275,6 +277,7 @@ escape =
         (\char acc ->
             if char == '"' then
                 acc ++ "\\\""
+
             else
                 acc ++ String.fromChar char
         )
@@ -287,6 +290,7 @@ hyphenate =
         (\char acc ->
             if Char.isUpper char then
                 acc ++ "-" ++ String.fromChar (Char.toLower char)
+
             else
                 acc ++ String.fromChar char
         )
