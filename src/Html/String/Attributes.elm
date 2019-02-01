@@ -121,7 +121,6 @@ import Json.Encode as Json
 
 {-| Specify a single CSS rule.
 
-
     greeting : Html msg
     greeting =
         div
@@ -545,7 +544,7 @@ type_ val =
 -}
 value : String -> Attribute msg
 value val =
-    stringProperty "val" val
+    stringProperty "value" val
 
 
 {-| Defines an initial val which will be displayed in an `input` when that
