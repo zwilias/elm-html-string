@@ -1,29 +1,27 @@
 module Html.String.Attributes exposing
     ( style, property, attribute, map
     , class, classList, id, title, hidden
-    , type_, value, defaultValue, checked, placeholder, selected
-    , accept, acceptCharset, action, autocomplete, autofocus, disabled, enctype, formaction, list, maxlength, minlength, method, multiple, name, novalidate, pattern, readonly, required, size, for, form
+    , type_, value, checked, placeholder, selected
+    , accept, acceptCharset, action, autocomplete, autofocus
+    , disabled, enctype, list, maxlength, minlength, method, multiple
+    , name, novalidate, pattern, readonly, required, size, for, form
     , max, min, step
     , cols, rows, wrap
-    , href, target, download, downloadAs, hreflang, media, ping, rel
+    , href, target, download, hreflang, media, ping, rel
     , ismap, usemap, shape, coords
     , src, height, width, alt
     , autoplay, controls, loop, preload, poster, default, kind, srclang
-    , sandbox, seamless, srcdoc
+    , sandbox, srcdoc
     , reversed, start
     , align, colspan, rowspan, headers, scope
-    , async, charset, content, defer, httpEquiv, language, scoped
-    , accesskey, contenteditable, contextmenu, dir, draggable, dropzone, itemprop, lang, spellcheck, tabindex
-    , challenge, keytype
+    , accesskey, contenteditable, contextmenu, dir, draggable, dropzone
+    , itemprop, lang, spellcheck, tabindex
     , cite, datetime, pubdate, manifest
     )
 
 {-| Helper functions for HTML attributes. They are organized roughly by
 category. Each attribute is labeled with the HTML tags it can be used with, so
 just search the page for `video` if you want video stuff.
-
-If you cannot find what you are looking for, go to the [Custom
-Attributes](#custom-attributes) section to learn how to create new helpers.
 
 
 # Primitives
@@ -38,12 +36,14 @@ Attributes](#custom-attributes) section to learn how to create new helpers.
 
 # Inputs
 
-@docs type_, value, defaultValue, checked, placeholder, selected
+@docs type_, value, checked, placeholder, selected
 
 
 ## Input Helpers
 
-@docs accept, acceptCharset, action, autocomplete, autofocus, disabled, enctype, formaction, list, maxlength, minlength, method, multiple, name, novalidate, pattern, readonly, required, size, for, form
+@docs accept, acceptCharset, action, autocomplete, autofocus
+@docs disabled, enctype, list, maxlength, minlength, method, multiple
+@docs name, novalidate, pattern, readonly, required, size, for, form
 
 
 ## Input Ranges
@@ -58,7 +58,7 @@ Attributes](#custom-attributes) section to learn how to create new helpers.
 
 # Links and Areas
 
-@docs href, target, download, downloadAs, hreflang, media, ping, rel
+@docs href, target, download, hreflang, media, ping, rel
 
 
 ## Maps
@@ -78,7 +78,7 @@ Attributes](#custom-attributes) section to learn how to create new helpers.
 
 ## iframes
 
-@docs sandbox, seamless, srcdoc
+@docs sandbox, srcdoc
 
 
 # Ordered Lists
@@ -91,21 +91,12 @@ Attributes](#custom-attributes) section to learn how to create new helpers.
 @docs align, colspan, rowspan, headers, scope
 
 
-# Header Stuff
-
-@docs async, charset, content, defer, httpEquiv, language, scoped
-
-
 # Less Common Global Attributes
 
 Attributes that can be attached to any HTML tag but are less commonly used.
 
-@docs accesskey, contenteditable, contextmenu, dir, draggable, dropzone, itemprop, lang, spellcheck, tabindex
-
-
-# Key Generation
-
-@docs challenge, keytype
+@docs accesskey, contenteditable, contextmenu, dir, draggable, dropzone
+@docs itemprop, lang, spellcheck, tabindex
 
 
 # Miscellaneous
@@ -328,70 +319,6 @@ tabindex n =
 
 
 
--- HEADER STUFF
-
-
-{-| Indicates that the `script` should be executed asynchronously.
--}
-async : Bool -> Attribute msg
-async bool =
-    boolProperty "async" bool
-
-
-{-| Declares the character encoding of the page or script. Common vals include:
-
-  - UTF-8 - Character encoding for Unicode
-  - ISO-8859-1 - Character encoding for the Latin alphabet
-
-For `meta` and `script`.
-
--}
-charset : String -> Attribute msg
-charset val =
-    attribute "charset" val
-
-
-{-| A val associated with http-equiv or name depending on the context. For
-`meta`.
--}
-content : String -> Attribute msg
-content val =
-    stringProperty "content" val
-
-
-{-| Indicates that a `script` should be executed after the page has been
-parsed.
--}
-defer : Bool -> Attribute msg
-defer bool =
-    boolProperty "defer" bool
-
-
-{-| This attribute is an indicator that is paired with the `content` attribute,
-indicating what that content means. `httpEquiv` can take on three different
-vals: content-type, default-style, or refresh. For `meta`.
--}
-httpEquiv : String -> Attribute msg
-httpEquiv val =
-    stringProperty "httpEquiv" val
-
-
-{-| Defines the script language used in a `script`.
--}
-language : String -> Attribute msg
-language val =
-    stringProperty "language" val
-
-
-{-| Indicates that a `style` should only apply to its parent and all of the
-parents children.
--}
-scoped : Bool -> Attribute msg
-scoped bool =
-    boolProperty "scoped" bool
-
-
-
 -- EMBEDDED CONTENT
 
 
@@ -512,13 +439,6 @@ sandbox val =
     stringProperty "sandbox" val
 
 
-{-| Make an `iframe` look like part of the containing document.
--}
-seamless : Bool -> Attribute msg
-seamless bool =
-    boolProperty "seamless" bool
-
-
 {-| An HTML document that will be displayed as the body of an `iframe`. It will
 override the content of the `src` attribute if it has been specified.
 -}
@@ -545,15 +465,6 @@ type_ val =
 value : String -> Attribute msg
 value val =
     stringProperty "value" val
-
-
-{-| Defines an initial val which will be displayed in an `input` when that
-`input` is added to the DOM. Unlike `val`, altering `defaultValue` after the
-`input` element has been added to the DOM has no effect.
--}
-defaultValue : String -> Attribute msg
-defaultValue val =
-    stringProperty "defaultValue" val
 
 
 {-| Indicates whether an `input` of type checkbox is checked.
@@ -641,14 +552,6 @@ text/plain.
 enctype : String -> Attribute msg
 enctype val =
     stringProperty "enctype" val
-
-
-{-| Indicates the action of an `input` or `button`. This overrides the action
-defined in the surrounding `form`.
--}
-formaction : String -> Attribute msg
-formaction val =
-    attribute "formAction" val
 
 
 {-| Associates an `input` with a `datalist` tag. The datalist gives some
@@ -854,25 +757,6 @@ coords val =
 
 
 
--- KEY GEN
-
-
-{-| A challenge string that is submitted along with the public key in a `keygen`.
--}
-challenge : String -> Attribute msg
-challenge val =
-    attribute "challenge" val
-
-
-{-| Specifies the type of key generated by a `keygen`. Possible vals are:
-rsa, dsa, and ec.
--}
-keytype : String -> Attribute msg
-keytype val =
-    stringProperty "keytype" val
-
-
-
 -- REAL STUFF
 
 
@@ -923,16 +807,8 @@ target val =
 {-| Indicates that clicking an `a` and `area` will download the resource
 directly.
 -}
-download : Bool -> Attribute msg
-download bool =
-    boolProperty "download" bool
-
-
-{-| Indicates that clicking an `a` and `area` will download the resource
-directly, and that the downloaded resource with have the given filename.
--}
-downloadAs : String -> Attribute msg
-downloadAs val =
+download : String -> Attribute msg
+download val =
     stringProperty "download" val
 
 

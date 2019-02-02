@@ -1,11 +1,20 @@
-module Html.Types exposing (Acc, Attribute(..), Children(..), Html(..), Indenter, TagInfo, attributeToHtml, attributeToString, buildProp, closingTag, escape, hyphenate, indent, join, map, mapAttribute, mapChildren, propName, tag, toHtml, toString, toStringHelper)
+module Html.Types exposing
+    ( Attribute(..)
+    , Children(..)
+    , EventDecoder(..)
+    , Html(..)
+    , map
+    , mapAttribute
+    , toHtml
+    , toString
+    )
 
 import Char
 import Html
 import Html.Attributes
 import Html.Events
 import Html.Keyed
-import Json.Decode exposing (Decoder, Value)
+import Json.Decode as Decode exposing (Decoder, Value)
 import Json.Encode as Encode
 import String.Conversions
 
@@ -50,7 +59,14 @@ type Attribute msg
     | BoolProperty String Bool
     | ValueProperty String Value
     | Style String String
-    | Event String { preventDefault : Bool, stopPropagation : Bool } (Decoder msg)
+    | Event String (EventDecoder msg)
+
+
+type EventDecoder msg
+    = Normal (Decoder msg)
+    | MayStopPropagation (Decoder ( msg, Bool ))
+    | MayPreventDefault (Decoder ( msg, Bool ))
+    | Custom (Decoder { message : msg, stopPropagation : Bool, preventDefault : Bool })
 
 
 mapAttribute : (a -> b) -> Attribute a -> Attribute b
@@ -71,8 +87,33 @@ mapAttribute f attribute =
         Style key value ->
             Style key value
 
-        Event name options msgDecoder ->
-            Event name options (Json.Decode.map f msgDecoder)
+        Event name eventDecoder ->
+            Event name (mapEventDecoder f eventDecoder)
+
+
+mapEventDecoder : (a -> b) -> EventDecoder a -> EventDecoder b
+mapEventDecoder f eventDecoder =
+    case eventDecoder of
+        Normal d ->
+            Normal (Decode.map f d)
+
+        MayStopPropagation d ->
+            MayStopPropagation (Decode.map (Tuple.mapFirst f) d)
+
+        MayPreventDefault d ->
+            MayPreventDefault (Decode.map (Tuple.mapFirst f) d)
+
+        Custom d ->
+            Custom
+                (Decode.map
+                    (\v ->
+                        { message = f v.message
+                        , stopPropagation = v.stopPropagation
+                        , preventDefault = v.preventDefault
+                        }
+                    )
+                    d
+                )
 
 
 toHtml : Html msg -> Html.Html msg
@@ -111,8 +152,17 @@ attributeToHtml attribute =
         Style key value ->
             Html.Attributes.style key value
 
-        Event name options decoder ->
-            Html.Events.custom name (decoder |> Json.Decode.andThen (\msg -> Json.Decode.succeed { message = msg, stopPropagation=options.stopPropagation, preventDefault = options.preventDefault}))
+        Event name (Normal d) ->
+            Html.Events.on name d
+
+        Event name (MayStopPropagation d) ->
+            Html.Events.stopPropagationOn name d
+
+        Event name (MayPreventDefault d) ->
+            Html.Events.preventDefaultOn name d
+
+        Event name (Custom d) ->
+            Html.Events.custom name d
 
 
 toString : Int -> Html msg -> String
@@ -265,9 +315,9 @@ attributeToString attribute =
             Just <| buildProp (propName string) (String.Conversions.fromValue value)
 
         Style key value ->
-            Just <| "style=\"" ++ key ++ ": " ++ value  ++ ";\""
+            Just <| "style=\"" ++ key ++ ": " ++ value ++ ";\""
 
-        Event string record msgDecoder ->
+        Event _ _ ->
             Nothing
 
 

@@ -1,4 +1,4 @@
-module Html.String.Lazy exposing (lazy, lazy2, lazy3)
+module Html.String.Lazy exposing (lazy, lazy2, lazy3, lazy4, lazy5, lazy6, lazy7, lazy8)
 
 {-|
 
@@ -9,7 +9,7 @@ module Html.String.Lazy exposing (lazy, lazy2, lazy3)
 eagerly evaluates. This set of function is here to serve as a drop-in
 replacement.
 
-@docs lazy, lazy2, lazy3
+@docs lazy, lazy2, lazy3, lazy4, lazy5, lazy6, lazy7, lazy8
 
 -}
 
@@ -41,4 +41,39 @@ lazy2 f x y =
 -}
 lazy3 : (a -> b -> c -> Html msg) -> a -> b -> c -> Html msg
 lazy3 f x y z =
+    f x y z
+
+
+{-| Same as `lazy` but checks on four arguments.
+-}
+lazy4 : (a -> b -> c -> Html msg) -> a -> b -> c -> Html msg
+lazy4 f x y z =
+    f x y z
+
+
+{-| Same as `lazy` but checks on five arguments.
+-}
+lazy5 : (a -> b -> c -> Html msg) -> a -> b -> c -> Html msg
+lazy5 f x y z =
+    f x y z
+
+
+{-| Same as `lazy` but checks on six arguments.
+-}
+lazy6 : (a -> b -> c -> Html msg) -> a -> b -> c -> Html msg
+lazy6 f x y z =
+    f x y z
+
+
+{-| Same as `lazy` but checks on seven arguments.
+-}
+lazy7 : (a -> b -> c -> Html msg) -> a -> b -> c -> Html msg
+lazy7 f x y z =
+    f x y z
+
+
+{-| Same as `lazy` but checks on eight arguments.
+-}
+lazy8 : (a -> b -> c -> Html msg) -> a -> b -> c -> Html msg
+lazy8 f x y z =
     f x y z

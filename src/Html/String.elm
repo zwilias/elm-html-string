@@ -7,10 +7,10 @@ module Html.String exposing
     , ol, ul, li, dl, dt, dd
     , img, iframe, canvas, math
     , form, input, textarea, button, select, option
-    , section, nav, article, aside, header, footer, address, main_, body
+    , section, nav, article, aside, header, footer, address, main_
     , figure, figcaption
     , table, caption, colgroup, col, tbody, thead, tfoot, tr, td, th
-    , fieldset, legend, label, datalist, optgroup, keygen, output, progress, meter
+    , fieldset, legend, label, datalist, optgroup, output, progress, meter
     , audio, video, source, track
     , embed, object, param
     , ins, del
@@ -56,7 +56,7 @@ expect to use frequently will be closer to the top.
 @docs ol, ul, li, dl, dt, dd
 
 
-## Emdedded Content
+## Embedded Content
 
 @docs img, iframe, canvas, math
 
@@ -68,7 +68,7 @@ expect to use frequently will be closer to the top.
 
 ## Sections
 
-@docs section, nav, article, aside, header, footer, address, main_, body
+@docs section, nav, article, aside, header, footer, address, main_
 
 
 ## Figures
@@ -86,7 +86,7 @@ expect to use frequently will be closer to the top.
 
 ### Less Common Inputs
 
-@docs fieldset, legend, label, datalist, optgroup, keygen, output, progress, meter
+@docs fieldset, legend, label, datalist, optgroup, output, progress, meter
 
 
 ### Audio and Video
@@ -238,15 +238,8 @@ text =
     TextNode
 
 
+
 -- SECTIONS
-
-
-{-| Represents the content of an HTML document. There is only one `body`
-element in a document.
--}
-body : List (Attribute msg) -> List (Html msg) -> Html msg
-body =
-    node "body"
 
 
 {-| Defines a section in a document.
@@ -928,13 +921,6 @@ option =
 textarea : List (Attribute msg) -> List (Html msg) -> Html msg
 textarea =
     node "textarea"
-
-
-{-| Represents a key-pair generator control.
--}
-keygen : List (Attribute msg) -> List (Html msg) -> Html msg
-keygen =
-    nodeWithoutChildren "keygen"
 
 
 {-| Represents the result of a calculation.
