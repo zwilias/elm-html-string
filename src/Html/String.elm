@@ -1,114 +1,23 @@
-module Html.String
-    exposing
-        ( Attribute
-        , Html
-        , a
-        , abbr
-        , address
-        , article
-        , aside
-        , audio
-        , b
-        , bdi
-        , bdo
-        , beginnerProgram
-        , blockquote
-        , body
-        , br
-        , button
-        , canvas
-        , caption
-        , cite
-        , code
-        , col
-        , colgroup
-        , datalist
-        , dd
-        , del
-        , details
-        , dfn
-        , div
-        , dl
-        , dt
-        , em
-        , embed
-        , fieldset
-        , figcaption
-        , figure
-        , footer
-        , form
-        , h1
-        , h2
-        , h3
-        , h4
-        , h5
-        , h6
-        , header
-        , hr
-        , i
-        , iframe
-        , img
-        , input
-        , ins
-        , kbd
-        , keygen
-        , label
-        , legend
-        , li
-        , main_
-        , map
-        , mark
-        , math
-        , menu
-        , menuitem
-        , meter
-        , nav
-        , node
-        , object
-        , ol
-        , optgroup
-        , option
-        , output
-        , p
-        , param
-        , pre
-        , program
-        , programWithFlags
-        , progress
-        , q
-        , rp
-        , rt
-        , ruby
-        , s
-        , samp
-        , section
-        , select
-        , small
-        , source
-        , span
-        , strong
-        , sub
-        , summary
-        , sup
-        , table
-        , tbody
-        , td
-        , text
-        , textarea
-        , tfoot
-        , th
-        , thead
-        , time
-        , toHtml
-        , toString
-        , tr
-        , track
-        , u
-        , ul
-        , var
-        , video
-        , wbr
-        )
+module Html.String exposing
+    ( toHtml, toString
+    , Html, Attribute, text, node, map
+    , h1, h2, h3, h4, h5, h6
+    , div, p, hr, pre, blockquote
+    , span, a, code, em, strong, i, b, u, sub, sup, br
+    , ol, ul, li, dl, dt, dd
+    , img, iframe, canvas, math
+    , form, input, textarea, button, select, option
+    , section, nav, article, aside, header, footer, address, main_, body
+    , figure, figcaption
+    , table, caption, colgroup, col, tbody, thead, tfoot, tr, td, th
+    , fieldset, legend, label, datalist, optgroup, keygen, output, progress, meter
+    , audio, video, source, track
+    , embed, object, param
+    , ins, del
+    , small, cite, dfn, abbr, time, var, samp, kbd, s, q
+    , mark, ruby, rt, rp, bdi, bdo, wbr
+    , details, summary, menuitem, menu
+    )
 
 {-| This file is organized roughly in order of popularity. The tags which you'd
 expect to use frequently will be closer to the top.
@@ -122,11 +31,6 @@ expect to use frequently will be closer to the top.
 # Primitives
 
 @docs Html, Attribute, text, node, map
-
-
-# Programs
-
-@docs beginnerProgram, program, programWithFlags
 
 
 # Tags
@@ -332,74 +236,6 @@ exactly as you specify.
 text : String -> Html msg
 text =
     TextNode
-
-
-{-| Create a [`Program`][program] that describes how your whole app works.
-
-Read about [The Elm Architecture][tea] to learn how to use this. Just do it.
-The additional context is very worthwhile! (Honestly, it is best to just read
-that guide from front to back instead of muddling around and reading it
-piecemeal.)
-
-[program]: http://package.elm-lang.org/packages/elm-lang/core/latest/Platform#Program
-[tea]: https://guide.elm-lang.org/architecture/
-
--}
-beginnerProgram :
-    { model : model
-    , view : model -> Html msg
-    , update : msg -> model -> model
-    }
-    -> Program Never model msg
-beginnerProgram { model, view, update } =
-    program
-        { init = model ! []
-        , update = \msg model -> update msg model ! []
-        , view = view
-        , subscriptions = \_ -> Sub.none
-        }
-
-
-{-| Create a [`Program`][program] that describes how your whole app works.
-
-Read about [The Elm Architecture][tea] to learn how to use this. Just do it.
-Commands and subscriptions make way more sense when you work up to them
-gradually and see them in context with examples.
-
-[program]: http://package.elm-lang.org/packages/elm-lang/core/latest/Platform#Program
-[tea]: https://guide.elm-lang.org/architecture/
-
--}
-program :
-    { init : ( model, Cmd msg )
-    , update : msg -> model -> ( model, Cmd msg )
-    , subscriptions : model -> Sub msg
-    , view : model -> Html msg
-    }
-    -> Program Never model msg
-program config =
-    Html.program { config | view = config.view >> toHtml }
-
-
-{-| Create a [`Program`][program] that describes how your whole app works.
-
-It works just like `program` but you can provide &ldquo;flags&rdquo; from
-JavaScript to configure your application. Read more about that [here].
-
-[program]: http://package.elm-lang.org/packages/elm-lang/core/latest/Platform#Program
-[here]: https://guide.elm-lang.org/interop/javascript.html
-
--}
-programWithFlags :
-    { init : flags -> ( model, Cmd msg )
-    , update : msg -> model -> ( model, Cmd msg )
-    , subscriptions : model -> Sub msg
-    , view : model -> Html msg
-    }
-    -> Program flags model msg
-programWithFlags config =
-    Html.programWithFlags { config | view = config.view >> toHtml }
-
 
 
 -- SECTIONS

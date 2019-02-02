@@ -1,4 +1,11 @@
-module Tests exposing (..)
+module Tests exposing
+    ( attributes
+    , classList
+    , eventsAreStripped
+    , indentedOutput
+    , nestedIndentation
+    , testCases
+    )
 
 import Expect exposing (Expectation)
 import Html.String as Html exposing (Html)
@@ -7,21 +14,17 @@ import Html.String.Events as Events
 import Test exposing (..)
 
 
-(=>) : a -> b -> ( a, b )
-(=>) =
-    (,)
-
-
 cases : List ( Html msg, String )
 cases =
-    [ Html.text "hello!" => "hello!"
-    , Html.span [] [ Html.text "spanned" ] => "<span>spanned</span>"
-    , Html.div []
-        [ Html.text "before"
-        , Html.br [] []
-        , Html.text "after"
-        ]
-        => "<div>before<br>after</div>"
+    [ ( Html.text "hello!", "hello!" )
+    , ( Html.span [] [ Html.text "spanned" ], "<span>spanned</span>" )
+    , ( Html.div []
+            [ Html.text "before"
+            , Html.br [] []
+            , Html.text "after"
+            ]
+      , "<div>before<br>after</div>"
+      )
     ]
 
 
@@ -36,7 +39,7 @@ testCase html expected =
 
 testCases : Test
 testCases =
-    describe "simple cases" <| List.map (uncurry testCase) cases
+    describe "simple cases" <| List.map (\( input, output ) -> testCase input output) cases
 
 
 indentedOutput : Test
@@ -66,20 +69,33 @@ attributes =
                 |> Expect.equal "<input value=\"hello\" placeholder=\"hold my place\">"
 
 
-styles : Test
-styles =
-    test "styles are serialized to proper css. Sorta." <|
-        \_ ->
-            Html.span [ Attr.style [ "line-height" => "12px", "color" => "black" ] ] []
-                |> Html.toString 0
-                |> Expect.equal "<span style=\"line-height: 12px; color: black\"></span>"
+
+{- styles : Test
+   styles =
+           test "styles are serialized to proper css. Sorta." <|
+               \_ ->
+                   Html.span
+                       [ Attr.style "line-height" "12px"
+                       , Attr.style "color" "black"
+                       ]
+                       []
+                       |> Html.toString 0
+                       |> Expect.equal "<span style=\"line-height: 12px; color: black\"></span>"
+-}
 
 
 classList : Test
 classList =
     test "classList is converted to a `class`" <|
         \_ ->
-            Html.span [ Attr.classList [ "foo" => True, "bar" => False, "et-cetera" => True ] ] []
+            Html.span
+                [ Attr.classList
+                    [ ( "foo", True )
+                    , ( "bar", False )
+                    , ( "et-cetera", True )
+                    ]
+                ]
+                []
                 |> Html.toString 0
                 |> Expect.equal "<span class=\"foo et-cetera\"></span>"
 

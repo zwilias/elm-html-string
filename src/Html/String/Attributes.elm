@@ -1,105 +1,22 @@
-module Html.String.Attributes
-    exposing
-        ( accept
-        , acceptCharset
-        , accesskey
-        , action
-        , align
-        , alt
-        , async
-        , attribute
-        , autocomplete
-        , autofocus
-        , autoplay
-        , challenge
-        , charset
-        , checked
-        , cite
-        , class
-        , classList
-        , cols
-        , colspan
-        , content
-        , contenteditable
-        , contextmenu
-        , controls
-        , coords
-        , datetime
-        , default
-        , defaultValue
-        , defer
-        , dir
-        , disabled
-        , download
-        , downloadAs
-        , draggable
-        , dropzone
-        , enctype
-        , for
-        , form
-        , formaction
-        , headers
-        , height
-        , hidden
-        , href
-        , hreflang
-        , httpEquiv
-        , id
-        , ismap
-        , itemprop
-        , keytype
-        , kind
-        , lang
-        , language
-        , list
-        , loop
-        , manifest
-        , map
-        , max
-        , maxlength
-        , media
-        , method
-        , min
-        , minlength
-        , multiple
-        , name
-        , novalidate
-        , pattern
-        , ping
-        , placeholder
-        , poster
-        , preload
-        , property
-        , pubdate
-        , readonly
-        , rel
-        , required
-        , reversed
-        , rows
-        , rowspan
-        , sandbox
-        , scope
-        , scoped
-        , seamless
-        , selected
-        , shape
-        , size
-        , spellcheck
-        , src
-        , srcdoc
-        , srclang
-        , start
-        , step
-        , style
-        , tabindex
-        , target
-        , title
-        , type_
-        , usemap
-        , value
-        , width
-        , wrap
-        )
+module Html.String.Attributes exposing
+    ( style, property, attribute, map
+    , class, classList, id, title, hidden
+    , type_, value, defaultValue, checked, placeholder, selected
+    , accept, acceptCharset, action, autocomplete, autofocus, disabled, enctype, formaction, list, maxlength, minlength, method, multiple, name, novalidate, pattern, readonly, required, size, for, form
+    , max, min, step
+    , cols, rows, wrap
+    , href, target, download, downloadAs, hreflang, media, ping, rel
+    , ismap, usemap, shape, coords
+    , src, height, width, alt
+    , autoplay, controls, loop, preload, poster, default, kind, srclang
+    , sandbox, seamless, srcdoc
+    , reversed, start
+    , align, colspan, rowspan, headers, scope
+    , async, charset, content, defer, httpEquiv, language, scoped
+    , accesskey, contenteditable, contextmenu, dir, draggable, dropzone, itemprop, lang, spellcheck, tabindex
+    , challenge, keytype
+    , cite, datetime, pubdate, manifest
+    )
 
 {-| Helper functions for HTML attributes. They are organized roughly by
 category. Each attribute is labeled with the HTML tags it can be used with, so
@@ -126,7 +43,7 @@ Attributes](#custom-attributes) section to learn how to create new helpers.
 
 ## Input Helpers
 
-@docs accept, acceptCharset, action, autocomplete, autofocus,disabled, enctype, formaction, list, maxlength, minlength, method, multiple,name, novalidate, pattern, readonly, required, size, for, form
+@docs accept, acceptCharset, action, autocomplete, autofocus, disabled, enctype, formaction, list, maxlength, minlength, method, multiple, name, novalidate, pattern, readonly, required, size, for, form
 
 
 ## Input Ranges
@@ -182,7 +99,8 @@ Attributes](#custom-attributes) section to learn how to create new helpers.
 # Less Common Global Attributes
 
 Attributes that can be attached to any HTML tag but are less commonly used.
-@docs accesskey, contenteditable, contextmenu, dir, draggable, dropzone,itemprop, lang, spellcheck, tabindex
+
+@docs accesskey, contenteditable, contextmenu, dir, draggable, dropzone, itemprop, lang, spellcheck, tabindex
 
 
 # Key Generation
@@ -201,32 +119,29 @@ import Html.Types
 import Json.Encode as Json
 
 
-{-| Specify a list of styles.
-
-    myStyle : Attribute msg
-    myStyle =
-        style
-            [ ( "backgroundColor", "red" )
-            , ( "height", "90px" )
-            , ( "width", "100%" )
-            ]
+{-| Specify a single CSS rule.
 
     greeting : Html msg
     greeting =
-        div [ myStyle ] [ text "Hello!" ]
+        div
+            [ style "backgroundColor" "red"
+            , style "height" "90px"
+            , style "width" "100%"
+            ]
+            [ text "Hello!" ]
 
 There is no `Html.Styles` module because best practices for working with HTML
 suggest that this should primarily be specified in CSS files. So the general
 recommendation is to use this function lightly.
 
 -}
-style : List ( String, String ) -> Attribute msg
+style : String -> String -> Attribute msg
 style =
     Html.Types.Style
 
 
 {-| This function makes it easier to build a space-separated class attribute.
-Each class can easily be added and removed depending on the boolean value it
+Each class can easily be added and removed depending on the boolean val it
 is paired with. For example, maybe we want a way to view notices:
 
     viewNotice : Notice -> Html msg
@@ -242,8 +157,8 @@ is paired with. For example, maybe we want a way to view notices:
 
 -}
 classList : List ( String, Bool ) -> Attribute msg
-classList list =
-    list
+classList conditionalClasses =
+    conditionalClasses
         |> List.filter Tuple.second
         |> List.map Tuple.first
         |> String.join " "
@@ -310,8 +225,8 @@ map =
 {-| Often used with CSS to style elements with common properties.
 -}
 class : String -> Attribute msg
-class name =
-    stringProperty "className" name
+class className =
+    stringProperty "className" className
 
 
 {-| Indicates the relevance of an element.
@@ -321,19 +236,19 @@ hidden bool =
     boolProperty "hidden" bool
 
 
-{-| Often used with CSS to style a specific element. The value of this
+{-| Often used with CSS to style a specific element. The val of this
 attribute must be unique.
 -}
 id : String -> Attribute msg
-id name =
-    stringProperty "id" name
+id val =
+    stringProperty "id" val
 
 
 {-| Text to be displayed in a tooltip when hovering over the element.
 -}
 title : String -> Attribute msg
-title name =
-    stringProperty "title" name
+title val =
+    stringProperty "title" val
 
 
 
@@ -358,43 +273,43 @@ contenteditable bool =
 context menu.
 -}
 contextmenu : String -> Attribute msg
-contextmenu value =
-    attribute "contextmenu" value
+contextmenu val =
+    attribute "contextmenu" val
 
 
-{-| Defines the text direction. Allowed values are ltr (Left-To-Right) or rtl
+{-| Defines the text direction. Allowed vals are ltr (Left-To-Right) or rtl
 (Right-To-Left).
 -}
 dir : String -> Attribute msg
-dir value =
-    stringProperty "dir" value
+dir val =
+    stringProperty "dir" val
 
 
 {-| Defines whether the element can be dragged.
 -}
 draggable : String -> Attribute msg
-draggable value =
-    attribute "draggable" value
+draggable val =
+    attribute "draggable" val
 
 
 {-| Indicates that the element accept the dropping of content on it.
 -}
 dropzone : String -> Attribute msg
-dropzone value =
-    stringProperty "dropzone" value
+dropzone val =
+    stringProperty "dropzone" val
 
 
 {-| -}
 itemprop : String -> Attribute msg
-itemprop value =
-    attribute "itemprop" value
+itemprop val =
+    attribute "itemprop" val
 
 
 {-| Defines the language used in the element.
 -}
 lang : String -> Attribute msg
-lang value =
-    stringProperty "lang" value
+lang val =
+    stringProperty "lang" val
 
 
 {-| Indicates whether spell checking is allowed for the element.
@@ -409,7 +324,7 @@ instead.
 -}
 tabindex : Int -> Attribute msg
 tabindex n =
-    attribute "tabIndex" (toString n)
+    attribute "tabIndex" (String.fromInt n)
 
 
 
@@ -423,7 +338,7 @@ async bool =
     boolProperty "async" bool
 
 
-{-| Declares the character encoding of the page or script. Common values include:
+{-| Declares the character encoding of the page or script. Common vals include:
 
   - UTF-8 - Character encoding for Unicode
   - ISO-8859-1 - Character encoding for the Latin alphabet
@@ -432,16 +347,16 @@ For `meta` and `script`.
 
 -}
 charset : String -> Attribute msg
-charset value =
-    attribute "charset" value
+charset val =
+    attribute "charset" val
 
 
-{-| A value associated with http-equiv or name depending on the context. For
+{-| A val associated with http-equiv or name depending on the context. For
 `meta`.
 -}
 content : String -> Attribute msg
-content value =
-    stringProperty "content" value
+content val =
+    stringProperty "content" val
 
 
 {-| Indicates that a `script` should be executed after the page has been
@@ -454,18 +369,18 @@ defer bool =
 
 {-| This attribute is an indicator that is paired with the `content` attribute,
 indicating what that content means. `httpEquiv` can take on three different
-values: content-type, default-style, or refresh. For `meta`.
+vals: content-type, default-style, or refresh. For `meta`.
 -}
 httpEquiv : String -> Attribute msg
-httpEquiv value =
-    stringProperty "httpEquiv" value
+httpEquiv val =
+    stringProperty "httpEquiv" val
 
 
 {-| Defines the script language used in a `script`.
 -}
 language : String -> Attribute msg
-language value =
-    stringProperty "language" value
+language val =
+    stringProperty "language" val
 
 
 {-| Indicates that a `style` should only apply to its parent and all of the
@@ -484,32 +399,32 @@ scoped bool =
 `input`, `script`, `source`, `track`, and `video`.
 -}
 src : String -> Attribute msg
-src value =
-    stringProperty "src" value
+src val =
+    stringProperty "src" val
 
 
 {-| Declare the height of a `canvas`, `embed`, `iframe`, `img`, `input`,
 `object`, or `video`.
 -}
 height : Int -> Attribute msg
-height value =
-    attribute "height" (toString value)
+height val =
+    attribute "height" (String.fromInt val)
 
 
 {-| Declare the width of a `canvas`, `embed`, `iframe`, `img`, `input`,
 `object`, or `video`.
 -}
 width : Int -> Attribute msg
-width value =
-    attribute "width" (toString value)
+width val =
+    attribute "width" (String.fromInt val)
 
 
 {-| Alternative text in case an image can't be displayed. Works with `img`,
 `area`, and `input`.
 -}
 alt : String -> Attribute msg
-alt value =
-    stringProperty "alt" value
+alt val =
+    stringProperty "alt" val
 
 
 
@@ -542,16 +457,16 @@ loop bool =
 {-| Control how much of an `audio` or `video` resource should be preloaded.
 -}
 preload : String -> Attribute msg
-preload value =
-    stringProperty "preload" value
+preload val =
+    stringProperty "preload" val
 
 
 {-| A URL indicating a poster frame to show until the user plays or seeks the
 `video`.
 -}
 poster : String -> Attribute msg
-poster value =
-    stringProperty "poster" value
+poster val =
+    stringProperty "poster" val
 
 
 {-| Indicates that the `track` should be enabled unless the user's preferences
@@ -565,24 +480,24 @@ default bool =
 {-| Specifies the kind of text `track`.
 -}
 kind : String -> Attribute msg
-kind value =
-    stringProperty "kind" value
+kind val =
+    stringProperty "kind" val
 
 
 
 {--TODO: maybe reintroduce once there's a better way to disambiguate imports
 {-| Specifies a user-readable title of the text `track`. -}
 label : String -> Attribute msg
-label value =
-  stringProperty "label" value
+label val =
+  stringProperty "label" val
 --}
 
 
 {-| A two letter language code indicating the language of the `track` text data.
 -}
 srclang : String -> Attribute msg
-srclang value =
-    stringProperty "srclang" value
+srclang val =
+    stringProperty "srclang" val
 
 
 
@@ -593,8 +508,8 @@ srclang value =
 `iframe`.
 -}
 sandbox : String -> Attribute msg
-sandbox value =
-    stringProperty "sandbox" value
+sandbox val =
+    stringProperty "sandbox" val
 
 
 {-| Make an `iframe` look like part of the containing document.
@@ -608,8 +523,8 @@ seamless bool =
 override the content of the `src` attribute if it has been specified.
 -}
 srcdoc : String -> Attribute msg
-srcdoc value =
-    stringProperty "srcdoc" value
+srcdoc val =
+    stringProperty "srcdoc" val
 
 
 
@@ -620,25 +535,25 @@ srcdoc value =
 `source`, `style`, or `menu`.
 -}
 type_ : String -> Attribute msg
-type_ value =
-    stringProperty "type" value
+type_ val =
+    stringProperty "type" val
 
 
-{-| Defines a default value which will be displayed in a `button`, `option`,
+{-| Defines a default val which will be displayed in a `button`, `option`,
 `input`, `li`, `meter`, `progress`, or `param`.
 -}
 value : String -> Attribute msg
-value value =
-    stringProperty "value" value
+value val =
+    stringProperty "value" val
 
 
-{-| Defines an initial value which will be displayed in an `input` when that
-`input` is added to the DOM. Unlike `value`, altering `defaultValue` after the
+{-| Defines an initial val which will be displayed in an `input` when that
+`input` is added to the DOM. Unlike `val`, altering `defaultValue` after the
 `input` element has been added to the DOM has no effect.
 -}
 defaultValue : String -> Attribute msg
-defaultValue value =
-    stringProperty "defaultValue" value
+defaultValue val =
+    stringProperty "defaultValue" val
 
 
 {-| Indicates whether an `input` of type checkbox is checked.
@@ -652,8 +567,8 @@ checked bool =
 `textarea`.
 -}
 placeholder : String -> Attribute msg
-placeholder value =
-    stringProperty "placeholder" value
+placeholder val =
+    stringProperty "placeholder" val
 
 
 {-| Defines which `option` will be selected on page load.
@@ -671,25 +586,25 @@ selected bool =
 For `form` and `input`.
 -}
 accept : String -> Attribute msg
-accept value =
-    stringProperty "accept" value
+accept val =
+    stringProperty "accept" val
 
 
 {-| List of supported charsets in a `form`.
 -}
 acceptCharset : String -> Attribute msg
-acceptCharset value =
-    stringProperty "acceptCharset" value
+acceptCharset val =
+    stringProperty "acceptCharset" val
 
 
 {-| The URI of a program that processes the information submitted via a `form`.
 -}
 action : String -> Attribute msg
-action value =
-    stringProperty "action" value
+action val =
+    stringProperty "action" val
 
 
-{-| Indicates whether a `form` or an `input` can have their values automatically
+{-| Indicates whether a `form` or an `input` can have their vals automatically
 completed by the browser.
 -}
 autocomplete : Bool -> Attribute msg
@@ -697,6 +612,7 @@ autocomplete bool =
     stringProperty "autocomplete"
         (if bool then
             "on"
+
          else
             "off"
         )
@@ -723,26 +639,26 @@ Options include: application/x-www-form-urlencoded, multipart/form-data, and
 text/plain.
 -}
 enctype : String -> Attribute msg
-enctype value =
-    stringProperty "enctype" value
+enctype val =
+    stringProperty "enctype" val
 
 
 {-| Indicates the action of an `input` or `button`. This overrides the action
 defined in the surrounding `form`.
 -}
 formaction : String -> Attribute msg
-formaction value =
-    attribute "formAction" value
+formaction val =
+    attribute "formAction" val
 
 
 {-| Associates an `input` with a `datalist` tag. The datalist gives some
 pre-defined options to suggest to the user as they interact with an input.
-The value of the list attribute must match the id of a `datalist` node.
+The val of the list attribute must match the id of a `datalist` node.
 For `input`.
 -}
 list : String -> Attribute msg
-list value =
-    attribute "list" value
+list val =
+    attribute "list" val
 
 
 {-| Defines the minimum number of characters allowed in an `input` or
@@ -750,7 +666,7 @@ list value =
 -}
 minlength : Int -> Attribute msg
 minlength n =
-    attribute "minLength" (toString n)
+    attribute "minLength" (String.fromInt n)
 
 
 {-| Defines the maximum number of characters allowed in an `input` or
@@ -758,18 +674,18 @@ minlength n =
 -}
 maxlength : Int -> Attribute msg
 maxlength n =
-    attribute "maxlength" (toString n)
+    attribute "maxlength" (String.fromInt n)
 
 
 {-| Defines which HTTP method to use when submitting a `form`. Can be GET
 (default) or POST.
 -}
 method : String -> Attribute msg
-method value =
-    stringProperty "method" value
+method val =
+    stringProperty "method" val
 
 
-{-| Indicates whether multiple values can be entered in an `input` of type
+{-| Indicates whether multiple vals can be entered in an `input` of type
 email or file. Can also indicate that you can `select` many options.
 -}
 multiple : Bool -> Attribute msg
@@ -782,8 +698,8 @@ in form submits. For `button`, `form`, `fieldset`, `iframe`, `input`, `keygen`,
 `object`, `output`, `select`, `textarea`, `map`, `meta`, and `param`.
 -}
 name : String -> Attribute msg
-name value =
-    stringProperty "name" value
+name val =
+    stringProperty "name" val
 
 
 {-| This attribute indicates that a `form` shouldn't be validated when
@@ -794,12 +710,12 @@ novalidate bool =
     boolProperty "noValidate" bool
 
 
-{-| Defines a regular expression which an `input`'s value will be validated
+{-| Defines a regular expression which an `input`'s val will be validated
 against.
 -}
 pattern : String -> Attribute msg
-pattern value =
-    stringProperty "pattern" value
+pattern val =
+    stringProperty "pattern" val
 
 
 {-| Indicates whether an `input` or `textarea` can be edited.
@@ -824,15 +740,15 @@ For `select` specifies the number of visible options in a drop-down list.
 -}
 size : Int -> Attribute msg
 size n =
-    attribute "size" (toString n)
+    attribute "size" (String.fromInt n)
 
 
 {-| The element ID described by this `label` or the element IDs that are used
 for an `output`.
 -}
 for : String -> Attribute msg
-for value =
-    stringProperty "htmlFor" value
+for val =
+    stringProperty "htmlFor" val
 
 
 {-| Indicates the element ID of the `form` that owns this particular `button`,
@@ -840,28 +756,28 @@ for value =
 `progress`, `select`, or `textarea`.
 -}
 form : String -> Attribute msg
-form value =
-    attribute "form" value
+form val =
+    attribute "form" val
 
 
 
 -- RANGES
 
 
-{-| Indicates the maximum value allowed. When using an input of type number or
-date, the max value must be a number or date. For `input`, `meter`, and `progress`.
+{-| Indicates the maximum val allowed. When using an input of type number or
+date, the max val must be a number or date. For `input`, `meter`, and `progress`.
 -}
 max : String -> Attribute msg
-max value =
-    stringProperty "max" value
+max val =
+    stringProperty "max" val
 
 
-{-| Indicates the minimum value allowed. When using an input of type number or
-date, the min value must be a number or date. For `input` and `meter`.
+{-| Indicates the minimum val allowed. When using an input of type number or
+date, the min val must be a number or date. For `input` and `meter`.
 -}
 min : String -> Attribute msg
-min value =
-    stringProperty "min" value
+min val =
+    stringProperty "min" val
 
 
 {-| Add a step size to an `input`. Use `step "any"` to allow any floating-point
@@ -880,22 +796,22 @@ step n =
 -}
 cols : Int -> Attribute msg
 cols n =
-    attribute "cols" (toString n)
+    attribute "cols" (String.fromInt n)
 
 
 {-| Defines the number of rows in a `textarea`.
 -}
 rows : Int -> Attribute msg
 rows n =
-    attribute "rows" (toString n)
+    attribute "rows" (String.fromInt n)
 
 
 {-| Indicates whether the text should be wrapped in a `textarea`. Possible
-values are "hard" and "soft".
+vals are "hard" and "soft".
 -}
 wrap : String -> Attribute msg
-wrap value =
-    stringProperty "wrap" value
+wrap val =
+    stringProperty "wrap" val
 
 
 
@@ -907,8 +823,8 @@ indicates that the click location should be added to the parent `a`'s href as
 a query string.
 -}
 ismap : Bool -> Attribute msg
-ismap value =
-    boolProperty "isMap" value
+ismap val =
+    boolProperty "isMap" val
 
 
 {-| Specify the hash name reference of a `map` that should be used for an `img`
@@ -916,25 +832,25 @@ or `object`. A hash name reference is a hash symbol followed by the element's na
 E.g. `"#planet-map"`.
 -}
 usemap : String -> Attribute msg
-usemap value =
-    stringProperty "useMap" value
+usemap val =
+    stringProperty "useMap" val
 
 
-{-| Declare the shape of the clickable area in an `a` or `area`. Valid values
+{-| Declare the shape of the clickable area in an `a` or `area`. Valid vals
 include: default, rect, circle, poly. This attribute can be paired with
 `coords` to create more particular shapes.
 -}
 shape : String -> Attribute msg
-shape value =
-    stringProperty "shape" value
+shape val =
+    stringProperty "shape" val
 
 
-{-| A set of values specifying the coordinates of the hot-spot region in an
+{-| A set of vals specifying the coordinates of the hot-spot region in an
 `area`. Needs to be paired with a `shape` attribute to be meaningful.
 -}
 coords : String -> Attribute msg
-coords value =
-    stringProperty "coords" value
+coords val =
+    stringProperty "coords" val
 
 
 
@@ -944,16 +860,16 @@ coords value =
 {-| A challenge string that is submitted along with the public key in a `keygen`.
 -}
 challenge : String -> Attribute msg
-challenge value =
-    attribute "challenge" value
+challenge val =
+    attribute "challenge" val
 
 
-{-| Specifies the type of key generated by a `keygen`. Possible values are:
+{-| Specifies the type of key generated by a `keygen`. Possible vals are:
 rsa, dsa, and ec.
 -}
 keytype : String -> Attribute msg
-keytype value =
-    stringProperty "keytype" value
+keytype val =
+    stringProperty "keytype" val
 
 
 
@@ -965,16 +881,16 @@ keytype value =
 `tr`.
 -}
 align : String -> Attribute msg
-align value =
-    stringProperty "align" value
+align val =
+    stringProperty "align" val
 
 
 {-| Contains a URI which points to the source of the quote or change in a
 `blockquote`, `del`, `ins`, or `q`.
 -}
 cite : String -> Attribute msg
-cite value =
-    stringProperty "cite" value
+cite val =
+    stringProperty "cite" val
 
 
 
@@ -984,24 +900,24 @@ cite value =
 {-| The URL of a linked resource, such as `a`, `area`, `base`, or `link`.
 -}
 href : String -> Attribute msg
-href value =
-    stringProperty "href" value
+href val =
+    stringProperty "href" val
 
 
 {-| Specify where the results of clicking an `a`, `area`, `base`, or `form`
-should appear. Possible special values include:
+should appear. Possible special vals include:
 
-  - _blank &mdash; a new window or tab
-  - _self &mdash; the same frame (this is default)
-  - _parent &mdash; the parent frame
-  - _top &mdash; the full body of the window
+  - \_blank &mdash; a new window or tab
+  - \_self &mdash; the same frame (this is default)
+  - \_parent &mdash; the parent frame
+  - \_top &mdash; the full body of the window
 
 You can also give the name of any `frame` you have created.
 
 -}
 target : String -> Attribute msg
-target value =
-    stringProperty "target" value
+target val =
+    stringProperty "target" val
 
 
 {-| Indicates that clicking an `a` and `area` will download the resource
@@ -1016,39 +932,39 @@ download bool =
 directly, and that the downloaded resource with have the given filename.
 -}
 downloadAs : String -> Attribute msg
-downloadAs value =
-    stringProperty "download" value
+downloadAs val =
+    stringProperty "download" val
 
 
 {-| Two-letter language code of the linked resource of an `a`, `area`, or `link`.
 -}
 hreflang : String -> Attribute msg
-hreflang value =
-    stringProperty "hreflang" value
+hreflang val =
+    stringProperty "hreflang" val
 
 
 {-| Specifies a hint of the target media of a `a`, `area`, `link`, `source`,
 or `style`.
 -}
 media : String -> Attribute msg
-media value =
-    attribute "media" value
+media val =
+    attribute "media" val
 
 
 {-| Specify a URL to send a short POST request to when the user clicks on an
 `a` or `area`. Useful for monitoring and tracking.
 -}
 ping : String -> Attribute msg
-ping value =
-    stringProperty "ping" value
+ping val =
+    stringProperty "ping" val
 
 
 {-| Specifies the relationship of the target object to the link object.
 For `a`, `area`, `link`.
 -}
 rel : String -> Attribute msg
-rel value =
-    attribute "rel" value
+rel val =
+    attribute "rel" val
 
 
 
@@ -1059,16 +975,16 @@ rel value =
 For `del`, `ins`, `time`.
 -}
 datetime : String -> Attribute msg
-datetime value =
-    attribute "datetime" value
+datetime val =
+    attribute "datetime" val
 
 
 {-| Indicates whether this date and time is the date of the nearest `article`
 ancestor element. For `time`.
 -}
 pubdate : String -> Attribute msg
-pubdate value =
-    attribute "pubdate" value
+pubdate val =
+    attribute "pubdate" val
 
 
 
@@ -1088,7 +1004,7 @@ besides 1.
 -}
 start : Int -> Attribute msg
 start n =
-    stringProperty "start" (toString n)
+    stringProperty "start" (String.fromInt n)
 
 
 
@@ -1100,15 +1016,15 @@ For `td` and `th`.
 -}
 colspan : Int -> Attribute msg
 colspan n =
-    attribute "colspan" (toString n)
+    attribute "colspan" (String.fromInt n)
 
 
 {-| A space separated list of element IDs indicating which `th` elements are
 headers for this cell. For `td` and `th`.
 -}
 headers : String -> Attribute msg
-headers value =
-    stringProperty "headers" value
+headers val =
+    stringProperty "headers" val
 
 
 {-| Defines the number of rows a table cell should span over.
@@ -1116,19 +1032,19 @@ For `td` and `th`.
 -}
 rowspan : Int -> Attribute msg
 rowspan n =
-    attribute "rowspan" (toString n)
+    attribute "rowspan" (String.fromInt n)
 
 
-{-| Specifies the scope of a header cell `th`. Possible values are: col, row,
+{-| Specifies the scope of a header cell `th`. Possible vals are: col, row,
 colgroup, rowgroup.
 -}
 scope : String -> Attribute msg
-scope value =
-    stringProperty "scope" value
+scope val =
+    stringProperty "scope" val
 
 
 {-| Specifies the URL of the cache manifest for an `html` tag.
 -}
 manifest : String -> Attribute msg
-manifest value =
-    attribute "manifest" value
+manifest val =
+    attribute "manifest" val

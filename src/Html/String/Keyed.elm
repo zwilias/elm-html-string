@@ -1,9 +1,7 @@
-module Html.String.Keyed
-    exposing
-        ( node
-        , ol
-        , ul
-        )
+module Html.String.Keyed exposing
+    ( node
+    , ol, ul
+    )
 
 {-| A keyed node helps optimize cases where children are getting added, moved,
 removed, etc. Common examples include:
