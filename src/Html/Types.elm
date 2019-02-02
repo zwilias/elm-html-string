@@ -271,7 +271,42 @@ toStringHelper indenter tags acc =
 
 tag : String -> List (Attribute msg) -> String
 tag tagName attributes =
-    "<" ++ String.join " " (tagName :: List.filterMap attributeToString attributes) ++ ">"
+    "<" ++ String.join " " (tagName :: attributesToString attributes) ++ ">"
+
+
+attributesToString : List (Attribute msg) -> List String
+attributesToString attrs =
+    let
+        ( classes, styles, regular ) =
+            List.foldl addAttribute ( [], [], [] ) attrs
+    in
+    regular
+        |> withClasses classes
+        |> withStyles styles
+
+
+withClasses : List String -> List String -> List String
+withClasses classes attrs =
+    case classes of
+        [] ->
+            attrs
+
+        _ ->
+            buildProp "class" (join " " classes) :: attrs
+
+
+withStyles : List String -> List String -> List String
+withStyles styles attrs =
+    case styles of
+        [] ->
+            attrs
+
+        _ ->
+            buildProp "style" (join "; " styles) :: attrs
+
+
+type alias AttrAcc =
+    ( List String, List String, List String )
 
 
 propName : String -> String
@@ -295,30 +330,42 @@ buildProp key value =
     hyphenate key ++ "=\"" ++ escape value ++ "\""
 
 
-attributeToString : Attribute msg -> Maybe String
-attributeToString attribute =
+addAttribute : Attribute msg -> AttrAcc -> AttrAcc
+addAttribute attribute (( classes, styles, attrs ) as acc) =
     case attribute of
         Attribute key value ->
-            Just <| buildProp key value
+            ( classes, styles, buildProp key value :: attrs )
+
+        StringProperty "className" value ->
+            ( value :: classes
+            , styles
+            , attrs
+            )
 
         StringProperty string value ->
-            Just <| buildProp (propName string) value
+            ( classes, styles, buildProp (propName string) value :: attrs )
 
         BoolProperty string enabled ->
             if enabled then
-                Just <| hyphenate <| propName string
+                ( classes, styles, hyphenate (propName string) :: attrs )
 
             else
-                Nothing
+                acc
 
         ValueProperty string value ->
-            Just <| buildProp (propName string) (String.Conversions.fromValue value)
+            ( classes
+            , styles
+            , buildProp (propName string) (String.Conversions.fromValue value) :: attrs
+            )
 
         Style key value ->
-            Just <| "style=\"" ++ key ++ ": " ++ value ++ ";\""
+            ( classes
+            , (escape key ++ ": " ++ escape value) :: styles
+            , attrs
+            )
 
         Event _ _ ->
-            Nothing
+            acc
 
 
 escape : String -> String

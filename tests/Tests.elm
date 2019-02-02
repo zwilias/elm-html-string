@@ -1,9 +1,11 @@
 module Tests exposing
     ( attributes
     , classList
+    , classes
     , eventsAreStripped
     , indentedOutput
     , nestedIndentation
+    , styles
     , testCases
     )
 
@@ -66,22 +68,33 @@ attributes =
         \_ ->
             Html.input [ Attr.value "hello", Attr.placeholder "hold my place" ] []
                 |> Html.toString 0
-                |> Expect.equal "<input value=\"hello\" placeholder=\"hold my place\">"
+                |> Expect.equal "<input placeholder=\"hold my place\" value=\"hello\">"
 
 
+classes : Test
+classes =
+    test "multiple calls to `class` get joined together" <|
+        \_ ->
+            Html.span
+                [ Attr.class "class-1"
+                , Attr.class "class-2"
+                ]
+                []
+                |> Html.toString 0
+                |> Expect.equal "<span class=\"class-1 class-2\"></span>"
 
-{- styles : Test
-   styles =
-           test "styles are serialized to proper css. Sorta." <|
-               \_ ->
-                   Html.span
-                       [ Attr.style "line-height" "12px"
-                       , Attr.style "color" "black"
-                       ]
-                       []
-                       |> Html.toString 0
-                       |> Expect.equal "<span style=\"line-height: 12px; color: black\"></span>"
--}
+
+styles : Test
+styles =
+    test "styles are serialized to proper css. Sorta." <|
+        \_ ->
+            Html.span
+                [ Attr.style "line-height" "12px"
+                , Attr.style "color" "black"
+                ]
+                []
+                |> Html.toString 0
+                |> Expect.equal "<span style=\"line-height: 12px; color: black\"></span>"
 
 
 classList : Test
