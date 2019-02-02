@@ -1,8 +1,8 @@
 # elm-html-string [![Build Status](https://travis-ci.org/zwilias/elm-html-string.svg)](https://travis-ci.org/zwilias/elm-html-string)
-> Write code resembling elm-lang/html and serialize to either a string or actual
+> Write code resembling elm/html and serialize to either a string or actual
 HTML
 
-This package copies the entire API of `elm-lang/html`, but adds 2 functions:
+This package copies the entire API of `elm/html`, but adds 2 functions:
 
 - `toHtml` which serializes the resulting `Html.String.Html msg` node into a
 `Html.Html msg` node
