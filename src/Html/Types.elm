@@ -235,38 +235,43 @@ toStringHelper indenter tags acc =
                     acc
 
                 ( tagName, cont ) :: rest ->
-                    { acc
-                        | result = indenter (acc.depth - 1) (closingTag tagName) :: acc.result
-                        , depth = acc.depth - 1
-                        , stack = rest
-                    }
-                        |> toStringHelper indenter cont
+                    toStringHelper indenter
+                        cont
+                        { acc
+                            | result = indenter (acc.depth - 1) (closingTag tagName) :: acc.result
+                            , depth = acc.depth - 1
+                            , stack = rest
+                        }
 
         (Node tagName attributes children) :: rest ->
             case children of
                 NoChildren ->
-                    { acc | result = indenter acc.depth (tag tagName attributes) :: acc.result }
-                        |> toStringHelper indenter rest
+                    toStringHelper indenter
+                        rest
+                        { acc | result = indenter acc.depth (tag tagName attributes) :: acc.result }
 
                 Regular childNodes ->
-                    { acc
-                        | result = indenter acc.depth (tag tagName attributes) :: acc.result
-                        , depth = acc.depth + 1
-                        , stack = ( tagName, rest ) :: acc.stack
-                    }
-                        |> toStringHelper indenter childNodes
+                    toStringHelper indenter
+                        childNodes
+                        { acc
+                            | result = indenter acc.depth (tag tagName attributes) :: acc.result
+                            , depth = acc.depth + 1
+                            , stack = ( tagName, rest ) :: acc.stack
+                        }
 
                 Keyed childNodes ->
-                    { acc
-                        | result = indenter acc.depth (tag tagName attributes) :: acc.result
-                        , depth = acc.depth + 1
-                        , stack = ( tagName, rest ) :: acc.stack
-                    }
-                        |> toStringHelper indenter (List.map Tuple.second childNodes)
+                    toStringHelper indenter
+                        (List.map Tuple.second childNodes)
+                        { acc
+                            | result = indenter acc.depth (tag tagName attributes) :: acc.result
+                            , depth = acc.depth + 1
+                            , stack = ( tagName, rest ) :: acc.stack
+                        }
 
         (TextNode string) :: rest ->
-            { acc | result = indenter acc.depth string :: acc.result }
-                |> toStringHelper indenter rest
+            toStringHelper indenter
+                rest
+                { acc | result = indenter acc.depth string :: acc.result }
 
 
 tag : String -> List (Attribute msg) -> String
