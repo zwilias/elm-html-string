@@ -271,12 +271,19 @@ toStringHelper indenter tags acc =
         (TextNode string) :: rest ->
             toStringHelper indenter
                 rest
-                { acc | result = indenter acc.depth string :: acc.result }
+                { acc | result = indenter acc.depth (escapeHtmlText string) :: acc.result }
 
 
 tag : String -> List (Attribute msg) -> String
 tag tagName attributes =
     "<" ++ String.join " " (tagName :: attributesToString attributes) ++ ">"
+
+
+escapeHtmlText : String -> String
+escapeHtmlText =
+    String.replace "&" "&amp;"
+        >> String.replace "<" "&lt;"
+        >> String.replace ">" "&gt;"
 
 
 attributesToString : List (Attribute msg) -> List String

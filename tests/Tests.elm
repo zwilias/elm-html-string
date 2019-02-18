@@ -27,6 +27,7 @@ cases =
             ]
       , "<div>before<br>after</div>"
       )
+    , ( Html.text "&<>", "&amp;&lt;&gt;" )
     ]
 
 
