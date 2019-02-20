@@ -1,28 +1,26 @@
-module Html.Types exposing
+module VirtualDom.Types exposing
     ( Attribute(..)
     , Children(..)
     , EventDecoder(..)
-    , Html(..)
+    , Node(..)
     , map
     , mapAttribute
-    , toHtml
     , toString
+    , toVirtualDom
     )
 
 import Char
-import Html
-import Html.Attributes
-import Html.Events
-import Html.Keyed
 import Json.Decode as Decode exposing (Decoder, Value)
 import Json.Encode as Encode
 import String.Conversions
+import Svg.Attributes
+import VirtualDom
 
 
 type Children msg
     = NoChildren
-    | Regular (List (Html msg))
-    | Keyed (List ( String, Html msg ))
+    | Regular (List (Node msg))
+    | Keyed (List ( String, Node msg ))
 
 
 mapChildren : (a -> b) -> Children a -> Children b
@@ -38,16 +36,20 @@ mapChildren f children =
             Keyed (List.map (Tuple.mapSecond <| map f) keyedNodes)
 
 
-type Html msg
+type Node msg
     = Node String (List (Attribute msg)) (Children msg)
+    | NodeNS String String (List (Attribute msg)) (Children msg)
     | TextNode String
 
 
-map : (a -> b) -> Html a -> Html b
+map : (a -> b) -> Node a -> Node b
 map f node =
     case node of
         Node tagName attrs children ->
             Node tagName (List.map (mapAttribute f) attrs) (mapChildren f children)
+
+        NodeNS namespace tagName attrs children ->
+            NodeNS namespace tagName (List.map (mapAttribute f) attrs) (mapChildren f children)
 
         TextNode content ->
             TextNode content
@@ -55,6 +57,7 @@ map f node =
 
 type Attribute msg
     = Attribute String String
+    | AttributeNS String String String
     | StringProperty String String
     | BoolProperty String Bool
     | ValueProperty String Value
@@ -74,6 +77,9 @@ mapAttribute f attribute =
     case attribute of
         Attribute key value ->
             Attribute key value
+
+        AttributeNS namespace key value ->
+            AttributeNS namespace key value
 
         StringProperty key value ->
             StringProperty key value
@@ -116,56 +122,95 @@ mapEventDecoder f eventDecoder =
                 )
 
 
-toHtml : Html msg -> Html.Html msg
-toHtml node =
+toVirtualDom : Node msg -> VirtualDom.Node msg
+toVirtualDom node =
     case node of
         Node tagName attributes children ->
             case children of
                 NoChildren ->
-                    Html.node tagName (List.map attributeToHtml attributes) []
+                    VirtualDom.node tagName (List.map attributeToNode attributes) []
 
                 Regular nodes ->
-                    Html.node tagName (List.map attributeToHtml attributes) (List.map toHtml nodes)
+                    VirtualDom.node tagName (List.map attributeToNode attributes) (List.map toVirtualDom nodes)
 
                 Keyed keyedNodes ->
-                    Html.Keyed.node tagName (List.map attributeToHtml attributes) (List.map (Tuple.mapSecond toHtml) keyedNodes)
+                    VirtualDom.keyedNode tagName (List.map attributeToNode attributes) (List.map (Tuple.mapSecond toVirtualDom) keyedNodes)
+
+        NodeNS namespace tagName attributes children ->
+            case children of
+                NoChildren ->
+                    VirtualDom.nodeNS namespace tagName (List.map attributeToNode attributes) []
+
+                Regular nodes ->
+                    VirtualDom.nodeNS namespace tagName (List.map attributeToNode attributes) (List.map toVirtualDom nodes)
+
+                Keyed keyedNodes ->
+                    VirtualDom.keyedNodeNS namespace tagName (List.map attributeToNode attributes) (List.map (Tuple.mapSecond toVirtualDom) keyedNodes)
 
         TextNode content ->
-            Html.text content
+            VirtualDom.text content
 
 
-attributeToHtml : Attribute msg -> Html.Attribute msg
-attributeToHtml attribute =
+attributeToNode : Attribute msg -> VirtualDom.Attribute msg
+attributeToNode attribute =
+    {- Some of the `Svg.Attributes` use Kernel code to escape the attribute value e.g.:
+       `(Elm.Kernel.VirtualDom.noJavaScriptUri value)`
+       For the Svg attributes using this escaping just manually
+       construct the specific attribute using the Svg library because
+       we cannot call the Kernel functions in a regular elm package.
+    -}
     case attribute of
         Attribute key value ->
-            Html.Attributes.attribute key value
+            VirtualDom.attribute key value
+
+        AttributeNS namespace key value ->
+            case key of
+                "xlink:href" ->
+                    Svg.Attributes.xlinkHref value
+
+                _ ->
+                    VirtualDom.attributeNS namespace key value
 
         StringProperty key value ->
-            Html.Attributes.property key (Encode.string value)
+            case key of
+                "from" ->
+                    Svg.Attributes.from value
+
+                "to" ->
+                    Svg.Attributes.to value
+
+                "values" ->
+                    Svg.Attributes.values value
+
+                "by" ->
+                    Svg.Attributes.by value
+
+                _ ->
+                    VirtualDom.property key (Encode.string value)
 
         BoolProperty key value ->
-            Html.Attributes.property key (Encode.bool value)
+            VirtualDom.property key (Encode.bool value)
 
         ValueProperty key value ->
-            Html.Attributes.property key value
+            VirtualDom.property key value
 
         Style key value ->
-            Html.Attributes.style key value
+            VirtualDom.style key value
 
         Event name (Normal d) ->
-            Html.Events.on name d
+            VirtualDom.on name (VirtualDom.Normal d)
 
         Event name (MayStopPropagation d) ->
-            Html.Events.stopPropagationOn name d
+            VirtualDom.on name (VirtualDom.MayStopPropagation d)
 
         Event name (MayPreventDefault d) ->
-            Html.Events.preventDefaultOn name d
+            VirtualDom.on name (VirtualDom.MayPreventDefault d)
 
         Event name (Custom d) ->
-            Html.Events.custom name d
+            VirtualDom.on name (VirtualDom.Custom d)
 
 
-toString : Int -> Html msg -> String
+toString : Int -> Node msg -> String
 toString depth html =
     let
         indenter : Indenter
@@ -223,10 +268,10 @@ type alias Acc msg =
 
 
 type alias TagInfo msg =
-    ( String, List (Html msg) )
+    ( String, List (Node msg) )
 
 
-toStringHelper : Indenter -> List (Html msg) -> Acc msg -> Acc msg
+toStringHelper : Indenter -> List (Node msg) -> Acc msg -> Acc msg
 toStringHelper indenter tags acc =
     case tags of
         [] ->
@@ -244,6 +289,35 @@ toStringHelper indenter tags acc =
                         }
 
         (Node tagName attributes children) :: rest ->
+            case children of
+                NoChildren ->
+                    toStringHelper indenter
+                        rest
+                        { acc | result = indenter acc.depth (tag tagName attributes) :: acc.result }
+
+                Regular childNodes ->
+                    toStringHelper indenter
+                        childNodes
+                        { acc
+                            | result = indenter acc.depth (tag tagName attributes) :: acc.result
+                            , depth = acc.depth + 1
+                            , stack = ( tagName, rest ) :: acc.stack
+                        }
+
+                Keyed childNodes ->
+                    toStringHelper indenter
+                        (List.map Tuple.second childNodes)
+                        { acc
+                            | result = indenter acc.depth (tag tagName attributes) :: acc.result
+                            , depth = acc.depth + 1
+                            , stack = ( tagName, rest ) :: acc.stack
+                        }
+
+        (NodeNS namespace tagName attributes children) :: rest ->
+            let
+                attributesWithNamespace =
+                    StringProperty "xml:space" namespace :: attributes
+            in
             case children of
                 NoChildren ->
                     toStringHelper indenter
@@ -346,6 +420,10 @@ addAttribute : Attribute msg -> AttrAcc -> AttrAcc
 addAttribute attribute (( classes, styles, attrs ) as acc) =
     case attribute of
         Attribute key value ->
+            ( classes, styles, buildProp key value :: attrs )
+
+        -- TODO figure out what namespaced attributes are rendered in raw HTML look like
+        AttributeNS namespace key value ->
             ( classes, styles, buildProp key value :: attrs )
 
         StringProperty "className" value ->

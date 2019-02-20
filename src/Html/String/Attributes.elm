@@ -106,8 +106,8 @@ Attributes that can be attached to any HTML tag but are less commonly used.
 -}
 
 import Html.String exposing (Attribute)
-import Html.Types
 import Json.Encode as Json
+import VirtualDom.Types
 
 
 {-| Specify a single CSS rule.
@@ -128,7 +128,7 @@ recommendation is to use this function lightly.
 -}
 style : String -> String -> Attribute msg
 style =
-    Html.Types.Style
+    VirtualDom.Types.Style
 
 
 {-| This function makes it easier to build a space-separated class attribute.
@@ -172,17 +172,17 @@ Read more about the difference between properties and attributes [here].
 -}
 property : String -> Json.Value -> Attribute msg
 property =
-    Html.Types.ValueProperty
+    VirtualDom.Types.ValueProperty
 
 
 stringProperty : String -> String -> Attribute msg
 stringProperty =
-    Html.Types.StringProperty
+    VirtualDom.Types.StringProperty
 
 
 boolProperty : String -> Bool -> Attribute msg
 boolProperty =
-    Html.Types.BoolProperty
+    VirtualDom.Types.BoolProperty
 
 
 {-| Create _attributes_, like saying `domNode.setAttribute('class', 'greeting')`
@@ -199,14 +199,14 @@ Read more about the difference between properties and attributes [here].
 -}
 attribute : String -> String -> Attribute msg
 attribute =
-    Html.Types.Attribute
+    VirtualDom.Types.Attribute
 
 
 {-| Transform the messages produced by an `Attribute`.
 -}
 map : (a -> msg) -> Attribute a -> Attribute msg
 map =
-    Html.Types.mapAttribute
+    VirtualDom.Types.mapAttribute
 
 
 

@@ -9,14 +9,21 @@
         "Html.String.Attributes",
         "Html.String.Keyed",
         "Html.String.Lazy",
-        "Html.String.Events"
+        "Html.String.Events",
+        "Svg.String",
+        "Svg.String.Attributes",
+        "Svg.String.Keyed",
+        "Svg.String.Lazy",
+        "Svg.String.Events"
     ],
     "elm-version": "0.19.0 <= v < 0.20.0",
     "dependencies": {
         "NoRedInk/elm-string-conversions": "1.0.0 <= v < 2.0.0",
         "elm/core": "1.0.0 <= v < 2.0.0",
         "elm/html": "1.0.0 <= v < 2.0.0",
-        "elm/json": "1.0.0 <= v < 2.0.0"
+        "elm/json": "1.0.0 <= v < 2.0.0",
+        "elm/svg": "1.0.1 <= v < 2.0.0",
+        "elm/virtual-dom": "1.0.2 <= v < 2.0.0"
     },
     "test-dependencies": {
         "elm-explorations/test": "1.2.1 <= v < 2.0.0"

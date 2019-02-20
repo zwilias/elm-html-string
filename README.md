@@ -1,12 +1,15 @@
 # elm-html-string [![Build Status](https://travis-ci.org/zwilias/elm-html-string.svg)](https://travis-ci.org/zwilias/elm-html-string)
-> Write code resembling elm/html and serialize to either a string or actual
-HTML
+> Write code resembling elm/html and elm/svg and serialize to either a string or actual
+HTML or SVG
 
-This package copies the entire API of `elm/html`, but adds 2 functions:
+This package copies the entire API of `elm/html` and `elm/svg`, but adds 4 functions:
 
-- `toHtml` which serializes the resulting `Html.String.Html msg` node into a
+- `Html.String.toHtml` which serializes the resulting `Html.String.Html msg` node into a
 `Html.Html msg` node
-- `toString` which serializes the node into a `String` with optional indentation
+- `Html.String.toString` which serializes the Html node into a `String` with optional indentation
+- `Svg.String.toSvg` which serializes the resulting `Svg.String.Svg msg` node into a
+`Svg.Svg msg` node
+- `Svg.String.toString` which serializes the Svg node into a `String` with optional indentation
 
 Two caveats:
 

@@ -46,8 +46,8 @@ of events as seen in the [TodoMVC] example.
 -}
 
 import Html.String exposing (Attribute)
-import Html.Types
 import Json.Decode as Json
+import VirtualDom.Types
 
 
 
@@ -212,7 +212,7 @@ touch, scroll, and wheel events in some browsers.
 -}
 on : String -> Json.Decoder msg -> Attribute msg
 on event decoder =
-    Html.Types.Event event (Html.Types.Normal decoder)
+    VirtualDom.Types.Event event (VirtualDom.Types.Normal decoder)
 
 
 {-| Create an event listener that may [`stopPropagation`][stop]. Your decoder
@@ -229,7 +229,7 @@ touch, scroll, and wheel events in some browsers.
 -}
 stopPropagationOn : String -> Json.Decoder ( msg, Bool ) -> Attribute msg
 stopPropagationOn event decoder =
-    Html.Types.Event event (Html.Types.MayStopPropagation decoder)
+    VirtualDom.Types.Event event (VirtualDom.Types.MayStopPropagation decoder)
 
 
 {-| Create an event listener that may [`preventDefault`][prevent]. Your decoder
@@ -252,7 +252,7 @@ default behavior:
 -}
 preventDefaultOn : String -> Json.Decoder ( msg, Bool ) -> Attribute msg
 preventDefaultOn event decoder =
-    Html.Types.Event event (Html.Types.MayPreventDefault decoder)
+    VirtualDom.Types.Event event (VirtualDom.Types.MayPreventDefault decoder)
 
 
 {-| Create an event listener that may [`stopPropagation`][stop] or
@@ -267,7 +267,7 @@ out the lower-level event API in `elm/virtual-dom`.
 -}
 custom : String -> Json.Decoder { message : msg, stopPropagation : Bool, preventDefault : Bool } -> Attribute msg
 custom event decoder =
-    Html.Types.Event event (Html.Types.Custom decoder)
+    VirtualDom.Types.Event event (VirtualDom.Types.Custom decoder)
 
 
 
