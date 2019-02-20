@@ -1,7 +1,4 @@
-module Html.String.Keyed exposing
-    ( node
-    , ol, ul
-    )
+module Svg.Keyed exposing (node)
 
 {-| A keyed node helps optimize cases where children are getting added, moved,
 removed, etc. Common examples include:
@@ -19,34 +16,17 @@ efficiently.
 
 @docs node
 
-
-# Commonly Keyed Nodes
-
-@docs ol, ul
-
 -}
 
-import Html.String exposing (Attribute, Html)
+import Svg.String exposing (Attribute, Svg)
 import VirtualDom.Types
 
 
-{-| Works just like `Html.node`, but you add a unique identifier to each child
+{-| Works just like `Svg.node`, but you add a unique identifier to each child
 node. You want this when you have a list of nodes that is changing: adding
 nodes, removing nodes, etc. In these cases, the unique identifiers help make
 the DOM modifications more efficient.
 -}
-node : String -> List (Attribute msg) -> List ( String, Html msg ) -> Html msg
+node : String -> List (Attribute msg) -> List ( String, Svg msg ) -> Svg msg
 node tag attrs children =
-    VirtualDom.Types.Node tag attrs (VirtualDom.Types.Keyed children)
-
-
-{-| -}
-ol : List (Attribute msg) -> List ( String, Html msg ) -> Html msg
-ol =
-    node "ol"
-
-
-{-| -}
-ul : List (Attribute msg) -> List ( String, Html msg ) -> Html msg
-ul =
-    node "ul"
+    VirtualDom.Types.NodeNS "http://www.w3.org/2000/svg" tag attrs (VirtualDom.Types.Keyed children)

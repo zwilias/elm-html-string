@@ -1,4 +1,4 @@
-module Tests exposing
+module HtmlTests exposing
     ( attributes
     , classList
     , classes

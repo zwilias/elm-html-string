@@ -121,7 +121,7 @@ expect to use frequently will be closer to the top.
 -}
 
 import Html
-import Html.Types as Types exposing (..)
+import VirtualDom.Types as Types exposing (..)
 
 
 {-| The core building block used to build up HTML. Here we create an `Html`
@@ -133,7 +133,7 @@ value with no attributes and one child:
 
 -}
 type alias Html msg =
-    Types.Html msg
+    Types.Node msg
 
 
 {-| Set attributes on your `Html`. Learn more in the
@@ -198,7 +198,7 @@ map =
 -}
 toHtml : Html msg -> Html.Html msg
 toHtml =
-    Types.toHtml
+    Types.toVirtualDom
 
 
 {-| Convert to a string with indentation.
