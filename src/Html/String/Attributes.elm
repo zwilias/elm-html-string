@@ -199,7 +199,7 @@ Read more about the difference between properties and attributes [here].
 -}
 attribute : String -> String -> Attribute msg
 attribute =
-    VirtualDom.Types.Attribute
+    VirtualDom.Types.Attribute True
 
 
 {-| Transform the messages produced by an `Attribute`.

@@ -104,1165 +104,1165 @@ import VirtualDom.Types
 {-| -}
 accentHeight : String -> Attribute msg
 accentHeight =
-    VirtualDom.Types.Attribute "accent-height"
+    VirtualDom.Types.Attribute False "accent-height"
 
 
 {-| -}
 accelerate : String -> Attribute msg
 accelerate =
-    VirtualDom.Types.Attribute "accelerate"
+    VirtualDom.Types.Attribute False "accelerate"
 
 
 {-| -}
 accumulate : String -> Attribute msg
 accumulate =
-    VirtualDom.Types.Attribute "accumulate"
+    VirtualDom.Types.Attribute False "accumulate"
 
 
 {-| -}
 additive : String -> Attribute msg
 additive =
-    VirtualDom.Types.Attribute "additive"
+    VirtualDom.Types.Attribute False "additive"
 
 
 {-| -}
 alphabetic : String -> Attribute msg
 alphabetic =
-    VirtualDom.Types.Attribute "alphabetic"
+    VirtualDom.Types.Attribute False "alphabetic"
 
 
 {-| -}
 allowReorder : String -> Attribute msg
 allowReorder =
-    VirtualDom.Types.Attribute "allowReorder"
+    VirtualDom.Types.Attribute False "allowReorder"
 
 
 {-| -}
 amplitude : String -> Attribute msg
 amplitude =
-    VirtualDom.Types.Attribute "amplitude"
+    VirtualDom.Types.Attribute False "amplitude"
 
 
 {-| -}
 arabicForm : String -> Attribute msg
 arabicForm =
-    VirtualDom.Types.Attribute "arabic-form"
+    VirtualDom.Types.Attribute False "arabic-form"
 
 
 {-| -}
 ascent : String -> Attribute msg
 ascent =
-    VirtualDom.Types.Attribute "ascent"
+    VirtualDom.Types.Attribute False "ascent"
 
 
 {-| -}
 attributeName : String -> Attribute msg
 attributeName =
-    VirtualDom.Types.Attribute "attributeName"
+    VirtualDom.Types.Attribute False "attributeName"
 
 
 {-| -}
 attributeType : String -> Attribute msg
 attributeType =
-    VirtualDom.Types.Attribute "attributeType"
+    VirtualDom.Types.Attribute False "attributeType"
 
 
 {-| -}
 autoReverse : String -> Attribute msg
 autoReverse =
-    VirtualDom.Types.Attribute "autoReverse"
+    VirtualDom.Types.Attribute False "autoReverse"
 
 
 {-| -}
 azimuth : String -> Attribute msg
 azimuth =
-    VirtualDom.Types.Attribute "azimuth"
+    VirtualDom.Types.Attribute False "azimuth"
 
 
 {-| -}
 baseFrequency : String -> Attribute msg
 baseFrequency =
-    VirtualDom.Types.Attribute "baseFrequency"
+    VirtualDom.Types.Attribute False "baseFrequency"
 
 
 {-| -}
 baseProfile : String -> Attribute msg
 baseProfile =
-    VirtualDom.Types.Attribute "baseProfile"
+    VirtualDom.Types.Attribute False "baseProfile"
 
 
 {-| -}
 bbox : String -> Attribute msg
 bbox =
-    VirtualDom.Types.Attribute "bbox"
+    VirtualDom.Types.Attribute False "bbox"
 
 
 {-| -}
 begin : String -> Attribute msg
 begin =
-    VirtualDom.Types.Attribute "begin"
+    VirtualDom.Types.Attribute False "begin"
 
 
 {-| -}
 bias : String -> Attribute msg
 bias =
-    VirtualDom.Types.Attribute "bias"
+    VirtualDom.Types.Attribute False "bias"
 
 
 {-| -}
 by : String -> Attribute msg
 by value =
-    VirtualDom.Types.Attribute "by" value
+    VirtualDom.Types.Attribute False "by" value
 
 
 {-| -}
 calcMode : String -> Attribute msg
 calcMode =
-    VirtualDom.Types.Attribute "calcMode"
+    VirtualDom.Types.Attribute False "calcMode"
 
 
 {-| -}
 capHeight : String -> Attribute msg
 capHeight =
-    VirtualDom.Types.Attribute "cap-height"
+    VirtualDom.Types.Attribute False "cap-height"
 
 
 {-| -}
 class : String -> Attribute msg
 class =
-    VirtualDom.Types.Attribute "class"
+    VirtualDom.Types.Attribute False "class"
 
 
 {-| -}
 clipPathUnits : String -> Attribute msg
 clipPathUnits =
-    VirtualDom.Types.Attribute "clipPathUnits"
+    VirtualDom.Types.Attribute False "clipPathUnits"
 
 
 {-| -}
 contentScriptType : String -> Attribute msg
 contentScriptType =
-    VirtualDom.Types.Attribute "contentScriptType"
+    VirtualDom.Types.Attribute False "contentScriptType"
 
 
 {-| -}
 contentStyleType : String -> Attribute msg
 contentStyleType =
-    VirtualDom.Types.Attribute "contentStyleType"
+    VirtualDom.Types.Attribute False "contentStyleType"
 
 
 {-| -}
 cx : String -> Attribute msg
 cx =
-    VirtualDom.Types.Attribute "cx"
+    VirtualDom.Types.Attribute False "cx"
 
 
 {-| -}
 cy : String -> Attribute msg
 cy =
-    VirtualDom.Types.Attribute "cy"
+    VirtualDom.Types.Attribute False "cy"
 
 
 {-| -}
 d : String -> Attribute msg
 d =
-    VirtualDom.Types.Attribute "d"
+    VirtualDom.Types.Attribute False "d"
 
 
 {-| -}
 decelerate : String -> Attribute msg
 decelerate =
-    VirtualDom.Types.Attribute "decelerate"
+    VirtualDom.Types.Attribute False "decelerate"
 
 
 {-| -}
 descent : String -> Attribute msg
 descent =
-    VirtualDom.Types.Attribute "descent"
+    VirtualDom.Types.Attribute False "descent"
 
 
 {-| -}
 diffuseConstant : String -> Attribute msg
 diffuseConstant =
-    VirtualDom.Types.Attribute "diffuseConstant"
+    VirtualDom.Types.Attribute False "diffuseConstant"
 
 
 {-| -}
 divisor : String -> Attribute msg
 divisor =
-    VirtualDom.Types.Attribute "divisor"
+    VirtualDom.Types.Attribute False "divisor"
 
 
 {-| -}
 dur : String -> Attribute msg
 dur =
-    VirtualDom.Types.Attribute "dur"
+    VirtualDom.Types.Attribute False "dur"
 
 
 {-| -}
 dx : String -> Attribute msg
 dx =
-    VirtualDom.Types.Attribute "dx"
+    VirtualDom.Types.Attribute False "dx"
 
 
 {-| -}
 dy : String -> Attribute msg
 dy =
-    VirtualDom.Types.Attribute "dy"
+    VirtualDom.Types.Attribute False "dy"
 
 
 {-| -}
 edgeMode : String -> Attribute msg
 edgeMode =
-    VirtualDom.Types.Attribute "edgeMode"
+    VirtualDom.Types.Attribute False "edgeMode"
 
 
 {-| -}
 elevation : String -> Attribute msg
 elevation =
-    VirtualDom.Types.Attribute "elevation"
+    VirtualDom.Types.Attribute False "elevation"
 
 
 {-| -}
 end : String -> Attribute msg
 end =
-    VirtualDom.Types.Attribute "end"
+    VirtualDom.Types.Attribute False "end"
 
 
 {-| -}
 exponent : String -> Attribute msg
 exponent =
-    VirtualDom.Types.Attribute "exponent"
+    VirtualDom.Types.Attribute False "exponent"
 
 
 {-| -}
 externalResourcesRequired : String -> Attribute msg
 externalResourcesRequired =
-    VirtualDom.Types.Attribute "externalResourcesRequired"
+    VirtualDom.Types.Attribute False "externalResourcesRequired"
 
 
 {-| -}
 filterRes : String -> Attribute msg
 filterRes =
-    VirtualDom.Types.Attribute "filterRes"
+    VirtualDom.Types.Attribute False "filterRes"
 
 
 {-| -}
 filterUnits : String -> Attribute msg
 filterUnits =
-    VirtualDom.Types.Attribute "filterUnits"
+    VirtualDom.Types.Attribute False "filterUnits"
 
 
 {-| -}
 format : String -> Attribute msg
 format =
-    VirtualDom.Types.Attribute "format"
+    VirtualDom.Types.Attribute False "format"
 
 
 {-| -}
 from : String -> Attribute msg
 from value =
-    VirtualDom.Types.Attribute "from" value
+    VirtualDom.Types.Attribute False "from" value
 
 
 {-| -}
 fx : String -> Attribute msg
 fx =
-    VirtualDom.Types.Attribute "fx"
+    VirtualDom.Types.Attribute False "fx"
 
 
 {-| -}
 fy : String -> Attribute msg
 fy =
-    VirtualDom.Types.Attribute "fy"
+    VirtualDom.Types.Attribute False "fy"
 
 
 {-| -}
 g1 : String -> Attribute msg
 g1 =
-    VirtualDom.Types.Attribute "g1"
+    VirtualDom.Types.Attribute False "g1"
 
 
 {-| -}
 g2 : String -> Attribute msg
 g2 =
-    VirtualDom.Types.Attribute "g2"
+    VirtualDom.Types.Attribute False "g2"
 
 
 {-| -}
 glyphName : String -> Attribute msg
 glyphName =
-    VirtualDom.Types.Attribute "glyph-name"
+    VirtualDom.Types.Attribute False "glyph-name"
 
 
 {-| -}
 glyphRef : String -> Attribute msg
 glyphRef =
-    VirtualDom.Types.Attribute "glyphRef"
+    VirtualDom.Types.Attribute False "glyphRef"
 
 
 {-| -}
 gradientTransform : String -> Attribute msg
 gradientTransform =
-    VirtualDom.Types.Attribute "gradientTransform"
+    VirtualDom.Types.Attribute False "gradientTransform"
 
 
 {-| -}
 gradientUnits : String -> Attribute msg
 gradientUnits =
-    VirtualDom.Types.Attribute "gradientUnits"
+    VirtualDom.Types.Attribute False "gradientUnits"
 
 
 {-| -}
 hanging : String -> Attribute msg
 hanging =
-    VirtualDom.Types.Attribute "hanging"
+    VirtualDom.Types.Attribute False "hanging"
 
 
 {-| -}
 height : String -> Attribute msg
 height =
-    VirtualDom.Types.Attribute "height"
+    VirtualDom.Types.Attribute False "height"
 
 
 {-| -}
 horizAdvX : String -> Attribute msg
 horizAdvX =
-    VirtualDom.Types.Attribute "horiz-adv-x"
+    VirtualDom.Types.Attribute False "horiz-adv-x"
 
 
 {-| -}
 horizOriginX : String -> Attribute msg
 horizOriginX =
-    VirtualDom.Types.Attribute "horiz-origin-x"
+    VirtualDom.Types.Attribute False "horiz-origin-x"
 
 
 {-| -}
 horizOriginY : String -> Attribute msg
 horizOriginY =
-    VirtualDom.Types.Attribute "horiz-origin-y"
+    VirtualDom.Types.Attribute False "horiz-origin-y"
 
 
 {-| -}
 id : String -> Attribute msg
 id =
-    VirtualDom.Types.Attribute "id"
+    VirtualDom.Types.Attribute False "id"
 
 
 {-| -}
 ideographic : String -> Attribute msg
 ideographic =
-    VirtualDom.Types.Attribute "ideographic"
+    VirtualDom.Types.Attribute False "ideographic"
 
 
 {-| -}
 in_ : String -> Attribute msg
 in_ =
-    VirtualDom.Types.Attribute "in"
+    VirtualDom.Types.Attribute False "in"
 
 
 {-| -}
 in2 : String -> Attribute msg
 in2 =
-    VirtualDom.Types.Attribute "in2"
+    VirtualDom.Types.Attribute False "in2"
 
 
 {-| -}
 intercept : String -> Attribute msg
 intercept =
-    VirtualDom.Types.Attribute "intercept"
+    VirtualDom.Types.Attribute False "intercept"
 
 
 {-| -}
 k : String -> Attribute msg
 k =
-    VirtualDom.Types.Attribute "k"
+    VirtualDom.Types.Attribute False "k"
 
 
 {-| -}
 k1 : String -> Attribute msg
 k1 =
-    VirtualDom.Types.Attribute "k1"
+    VirtualDom.Types.Attribute False "k1"
 
 
 {-| -}
 k2 : String -> Attribute msg
 k2 =
-    VirtualDom.Types.Attribute "k2"
+    VirtualDom.Types.Attribute False "k2"
 
 
 {-| -}
 k3 : String -> Attribute msg
 k3 =
-    VirtualDom.Types.Attribute "k3"
+    VirtualDom.Types.Attribute False "k3"
 
 
 {-| -}
 k4 : String -> Attribute msg
 k4 =
-    VirtualDom.Types.Attribute "k4"
+    VirtualDom.Types.Attribute False "k4"
 
 
 {-| -}
 kernelMatrix : String -> Attribute msg
 kernelMatrix =
-    VirtualDom.Types.Attribute "kernelMatrix"
+    VirtualDom.Types.Attribute False "kernelMatrix"
 
 
 {-| -}
 kernelUnitLength : String -> Attribute msg
 kernelUnitLength =
-    VirtualDom.Types.Attribute "kernelUnitLength"
+    VirtualDom.Types.Attribute False "kernelUnitLength"
 
 
 {-| -}
 keyPoints : String -> Attribute msg
 keyPoints =
-    VirtualDom.Types.Attribute "keyPoints"
+    VirtualDom.Types.Attribute False "keyPoints"
 
 
 {-| -}
 keySplines : String -> Attribute msg
 keySplines =
-    VirtualDom.Types.Attribute "keySplines"
+    VirtualDom.Types.Attribute False "keySplines"
 
 
 {-| -}
 keyTimes : String -> Attribute msg
 keyTimes =
-    VirtualDom.Types.Attribute "keyTimes"
+    VirtualDom.Types.Attribute False "keyTimes"
 
 
 {-| -}
 lang : String -> Attribute msg
 lang =
-    VirtualDom.Types.Attribute "lang"
+    VirtualDom.Types.Attribute False "lang"
 
 
 {-| -}
 lengthAdjust : String -> Attribute msg
 lengthAdjust =
-    VirtualDom.Types.Attribute "lengthAdjust"
+    VirtualDom.Types.Attribute False "lengthAdjust"
 
 
 {-| -}
 limitingConeAngle : String -> Attribute msg
 limitingConeAngle =
-    VirtualDom.Types.Attribute "limitingConeAngle"
+    VirtualDom.Types.Attribute False "limitingConeAngle"
 
 
 {-| -}
 local : String -> Attribute msg
 local =
-    VirtualDom.Types.Attribute "local"
+    VirtualDom.Types.Attribute False "local"
 
 
 {-| -}
 markerHeight : String -> Attribute msg
 markerHeight =
-    VirtualDom.Types.Attribute "markerHeight"
+    VirtualDom.Types.Attribute False "markerHeight"
 
 
 {-| -}
 markerUnits : String -> Attribute msg
 markerUnits =
-    VirtualDom.Types.Attribute "markerUnits"
+    VirtualDom.Types.Attribute False "markerUnits"
 
 
 {-| -}
 markerWidth : String -> Attribute msg
 markerWidth =
-    VirtualDom.Types.Attribute "markerWidth"
+    VirtualDom.Types.Attribute False "markerWidth"
 
 
 {-| -}
 maskContentUnits : String -> Attribute msg
 maskContentUnits =
-    VirtualDom.Types.Attribute "maskContentUnits"
+    VirtualDom.Types.Attribute False "maskContentUnits"
 
 
 {-| -}
 maskUnits : String -> Attribute msg
 maskUnits =
-    VirtualDom.Types.Attribute "maskUnits"
+    VirtualDom.Types.Attribute False "maskUnits"
 
 
 {-| -}
 mathematical : String -> Attribute msg
 mathematical =
-    VirtualDom.Types.Attribute "mathematical"
+    VirtualDom.Types.Attribute False "mathematical"
 
 
 {-| -}
 max : String -> Attribute msg
 max =
-    VirtualDom.Types.Attribute "max"
+    VirtualDom.Types.Attribute False "max"
 
 
 {-| -}
 media : String -> Attribute msg
 media =
-    VirtualDom.Types.Attribute "media"
+    VirtualDom.Types.Attribute False "media"
 
 
 {-| -}
 method : String -> Attribute msg
 method =
-    VirtualDom.Types.Attribute "method"
+    VirtualDom.Types.Attribute False "method"
 
 
 {-| -}
 min : String -> Attribute msg
 min =
-    VirtualDom.Types.Attribute "min"
+    VirtualDom.Types.Attribute False "min"
 
 
 {-| -}
 mode : String -> Attribute msg
 mode =
-    VirtualDom.Types.Attribute "mode"
+    VirtualDom.Types.Attribute False "mode"
 
 
 {-| -}
 name : String -> Attribute msg
 name =
-    VirtualDom.Types.Attribute "name"
+    VirtualDom.Types.Attribute False "name"
 
 
 {-| -}
 numOctaves : String -> Attribute msg
 numOctaves =
-    VirtualDom.Types.Attribute "numOctaves"
+    VirtualDom.Types.Attribute False "numOctaves"
 
 
 {-| -}
 offset : String -> Attribute msg
 offset =
-    VirtualDom.Types.Attribute "offset"
+    VirtualDom.Types.Attribute False "offset"
 
 
 {-| -}
 operator : String -> Attribute msg
 operator =
-    VirtualDom.Types.Attribute "operator"
+    VirtualDom.Types.Attribute False "operator"
 
 
 {-| -}
 order : String -> Attribute msg
 order =
-    VirtualDom.Types.Attribute "order"
+    VirtualDom.Types.Attribute False "order"
 
 
 {-| -}
 orient : String -> Attribute msg
 orient =
-    VirtualDom.Types.Attribute "orient"
+    VirtualDom.Types.Attribute False "orient"
 
 
 {-| -}
 orientation : String -> Attribute msg
 orientation =
-    VirtualDom.Types.Attribute "orientation"
+    VirtualDom.Types.Attribute False "orientation"
 
 
 {-| -}
 origin : String -> Attribute msg
 origin =
-    VirtualDom.Types.Attribute "origin"
+    VirtualDom.Types.Attribute False "origin"
 
 
 {-| -}
 overlinePosition : String -> Attribute msg
 overlinePosition =
-    VirtualDom.Types.Attribute "overline-position"
+    VirtualDom.Types.Attribute False "overline-position"
 
 
 {-| -}
 overlineThickness : String -> Attribute msg
 overlineThickness =
-    VirtualDom.Types.Attribute "overline-thickness"
+    VirtualDom.Types.Attribute False "overline-thickness"
 
 
 {-| -}
 panose1 : String -> Attribute msg
 panose1 =
-    VirtualDom.Types.Attribute "panose-1"
+    VirtualDom.Types.Attribute False "panose-1"
 
 
 {-| -}
 path : String -> Attribute msg
 path =
-    VirtualDom.Types.Attribute "path"
+    VirtualDom.Types.Attribute False "path"
 
 
 {-| -}
 pathLength : String -> Attribute msg
 pathLength =
-    VirtualDom.Types.Attribute "pathLength"
+    VirtualDom.Types.Attribute False "pathLength"
 
 
 {-| -}
 patternContentUnits : String -> Attribute msg
 patternContentUnits =
-    VirtualDom.Types.Attribute "patternContentUnits"
+    VirtualDom.Types.Attribute False "patternContentUnits"
 
 
 {-| -}
 patternTransform : String -> Attribute msg
 patternTransform =
-    VirtualDom.Types.Attribute "patternTransform"
+    VirtualDom.Types.Attribute False "patternTransform"
 
 
 {-| -}
 patternUnits : String -> Attribute msg
 patternUnits =
-    VirtualDom.Types.Attribute "patternUnits"
+    VirtualDom.Types.Attribute False "patternUnits"
 
 
 {-| -}
 pointOrder : String -> Attribute msg
 pointOrder =
-    VirtualDom.Types.Attribute "point-order"
+    VirtualDom.Types.Attribute False "point-order"
 
 
 {-| -}
 points : String -> Attribute msg
 points =
-    VirtualDom.Types.Attribute "points"
+    VirtualDom.Types.Attribute False "points"
 
 
 {-| -}
 pointsAtX : String -> Attribute msg
 pointsAtX =
-    VirtualDom.Types.Attribute "pointsAtX"
+    VirtualDom.Types.Attribute False "pointsAtX"
 
 
 {-| -}
 pointsAtY : String -> Attribute msg
 pointsAtY =
-    VirtualDom.Types.Attribute "pointsAtY"
+    VirtualDom.Types.Attribute False "pointsAtY"
 
 
 {-| -}
 pointsAtZ : String -> Attribute msg
 pointsAtZ =
-    VirtualDom.Types.Attribute "pointsAtZ"
+    VirtualDom.Types.Attribute False "pointsAtZ"
 
 
 {-| -}
 preserveAlpha : String -> Attribute msg
 preserveAlpha =
-    VirtualDom.Types.Attribute "preserveAlpha"
+    VirtualDom.Types.Attribute False "preserveAlpha"
 
 
 {-| -}
 preserveAspectRatio : String -> Attribute msg
 preserveAspectRatio =
-    VirtualDom.Types.Attribute "preserveAspectRatio"
+    VirtualDom.Types.Attribute False "preserveAspectRatio"
 
 
 {-| -}
 primitiveUnits : String -> Attribute msg
 primitiveUnits =
-    VirtualDom.Types.Attribute "primitiveUnits"
+    VirtualDom.Types.Attribute False "primitiveUnits"
 
 
 {-| -}
 r : String -> Attribute msg
 r =
-    VirtualDom.Types.Attribute "r"
+    VirtualDom.Types.Attribute False "r"
 
 
 {-| -}
 radius : String -> Attribute msg
 radius =
-    VirtualDom.Types.Attribute "radius"
+    VirtualDom.Types.Attribute False "radius"
 
 
 {-| -}
 refX : String -> Attribute msg
 refX =
-    VirtualDom.Types.Attribute "refX"
+    VirtualDom.Types.Attribute False "refX"
 
 
 {-| -}
 refY : String -> Attribute msg
 refY =
-    VirtualDom.Types.Attribute "refY"
+    VirtualDom.Types.Attribute False "refY"
 
 
 {-| -}
 renderingIntent : String -> Attribute msg
 renderingIntent =
-    VirtualDom.Types.Attribute "rendering-intent"
+    VirtualDom.Types.Attribute False "rendering-intent"
 
 
 {-| -}
 repeatCount : String -> Attribute msg
 repeatCount =
-    VirtualDom.Types.Attribute "repeatCount"
+    VirtualDom.Types.Attribute False "repeatCount"
 
 
 {-| -}
 repeatDur : String -> Attribute msg
 repeatDur =
-    VirtualDom.Types.Attribute "repeatDur"
+    VirtualDom.Types.Attribute False "repeatDur"
 
 
 {-| -}
 requiredExtensions : String -> Attribute msg
 requiredExtensions =
-    VirtualDom.Types.Attribute "requiredExtensions"
+    VirtualDom.Types.Attribute False "requiredExtensions"
 
 
 {-| -}
 requiredFeatures : String -> Attribute msg
 requiredFeatures =
-    VirtualDom.Types.Attribute "requiredFeatures"
+    VirtualDom.Types.Attribute False "requiredFeatures"
 
 
 {-| -}
 restart : String -> Attribute msg
 restart =
-    VirtualDom.Types.Attribute "restart"
+    VirtualDom.Types.Attribute False "restart"
 
 
 {-| -}
 result : String -> Attribute msg
 result =
-    VirtualDom.Types.Attribute "result"
+    VirtualDom.Types.Attribute False "result"
 
 
 {-| -}
 rotate : String -> Attribute msg
 rotate =
-    VirtualDom.Types.Attribute "rotate"
+    VirtualDom.Types.Attribute False "rotate"
 
 
 {-| -}
 rx : String -> Attribute msg
 rx =
-    VirtualDom.Types.Attribute "rx"
+    VirtualDom.Types.Attribute False "rx"
 
 
 {-| -}
 ry : String -> Attribute msg
 ry =
-    VirtualDom.Types.Attribute "ry"
+    VirtualDom.Types.Attribute False "ry"
 
 
 {-| -}
 scale : String -> Attribute msg
 scale =
-    VirtualDom.Types.Attribute "scale"
+    VirtualDom.Types.Attribute False "scale"
 
 
 {-| -}
 seed : String -> Attribute msg
 seed =
-    VirtualDom.Types.Attribute "seed"
+    VirtualDom.Types.Attribute False "seed"
 
 
 {-| -}
 slope : String -> Attribute msg
 slope =
-    VirtualDom.Types.Attribute "slope"
+    VirtualDom.Types.Attribute False "slope"
 
 
 {-| -}
 spacing : String -> Attribute msg
 spacing =
-    VirtualDom.Types.Attribute "spacing"
+    VirtualDom.Types.Attribute False "spacing"
 
 
 {-| -}
 specularConstant : String -> Attribute msg
 specularConstant =
-    VirtualDom.Types.Attribute "specularConstant"
+    VirtualDom.Types.Attribute False "specularConstant"
 
 
 {-| -}
 specularExponent : String -> Attribute msg
 specularExponent =
-    VirtualDom.Types.Attribute "specularExponent"
+    VirtualDom.Types.Attribute False "specularExponent"
 
 
 {-| -}
 speed : String -> Attribute msg
 speed =
-    VirtualDom.Types.Attribute "speed"
+    VirtualDom.Types.Attribute False "speed"
 
 
 {-| -}
 spreadMethod : String -> Attribute msg
 spreadMethod =
-    VirtualDom.Types.Attribute "spreadMethod"
+    VirtualDom.Types.Attribute False "spreadMethod"
 
 
 {-| -}
 startOffset : String -> Attribute msg
 startOffset =
-    VirtualDom.Types.Attribute "startOffset"
+    VirtualDom.Types.Attribute False "startOffset"
 
 
 {-| -}
 stdDeviation : String -> Attribute msg
 stdDeviation =
-    VirtualDom.Types.Attribute "stdDeviation"
+    VirtualDom.Types.Attribute False "stdDeviation"
 
 
 {-| -}
 stemh : String -> Attribute msg
 stemh =
-    VirtualDom.Types.Attribute "stemh"
+    VirtualDom.Types.Attribute False "stemh"
 
 
 {-| -}
 stemv : String -> Attribute msg
 stemv =
-    VirtualDom.Types.Attribute "stemv"
+    VirtualDom.Types.Attribute False "stemv"
 
 
 {-| -}
 stitchTiles : String -> Attribute msg
 stitchTiles =
-    VirtualDom.Types.Attribute "stitchTiles"
+    VirtualDom.Types.Attribute False "stitchTiles"
 
 
 {-| -}
 strikethroughPosition : String -> Attribute msg
 strikethroughPosition =
-    VirtualDom.Types.Attribute "strikethrough-position"
+    VirtualDom.Types.Attribute False "strikethrough-position"
 
 
 {-| -}
 strikethroughThickness : String -> Attribute msg
 strikethroughThickness =
-    VirtualDom.Types.Attribute "strikethrough-thickness"
+    VirtualDom.Types.Attribute False "strikethrough-thickness"
 
 
 {-| -}
 string : String -> Attribute msg
 string =
-    VirtualDom.Types.Attribute "string"
+    VirtualDom.Types.Attribute False "string"
 
 
 {-| -}
 style : String -> Attribute msg
 style =
-    VirtualDom.Types.Attribute "style"
+    VirtualDom.Types.Attribute False "style"
 
 
 {-| -}
 surfaceScale : String -> Attribute msg
 surfaceScale =
-    VirtualDom.Types.Attribute "surfaceScale"
+    VirtualDom.Types.Attribute False "surfaceScale"
 
 
 {-| -}
 systemLanguage : String -> Attribute msg
 systemLanguage =
-    VirtualDom.Types.Attribute "systemLanguage"
+    VirtualDom.Types.Attribute False "systemLanguage"
 
 
 {-| -}
 tableValues : String -> Attribute msg
 tableValues =
-    VirtualDom.Types.Attribute "tableValues"
+    VirtualDom.Types.Attribute False "tableValues"
 
 
 {-| -}
 target : String -> Attribute msg
 target =
-    VirtualDom.Types.Attribute "target"
+    VirtualDom.Types.Attribute False "target"
 
 
 {-| -}
 targetX : String -> Attribute msg
 targetX =
-    VirtualDom.Types.Attribute "targetX"
+    VirtualDom.Types.Attribute False "targetX"
 
 
 {-| -}
 targetY : String -> Attribute msg
 targetY =
-    VirtualDom.Types.Attribute "targetY"
+    VirtualDom.Types.Attribute False "targetY"
 
 
 {-| -}
 textLength : String -> Attribute msg
 textLength =
-    VirtualDom.Types.Attribute "textLength"
+    VirtualDom.Types.Attribute False "textLength"
 
 
 {-| -}
 title : String -> Attribute msg
 title =
-    VirtualDom.Types.Attribute "title"
+    VirtualDom.Types.Attribute False "title"
 
 
 {-| -}
 to : String -> Attribute msg
 to value =
-    VirtualDom.Types.Attribute "to" value
+    VirtualDom.Types.Attribute False "to" value
 
 
 {-| -}
 transform : String -> Attribute msg
 transform =
-    VirtualDom.Types.Attribute "transform"
+    VirtualDom.Types.Attribute False "transform"
 
 
 {-| -}
 type_ : String -> Attribute msg
 type_ =
-    VirtualDom.Types.Attribute "type"
+    VirtualDom.Types.Attribute False "type"
 
 
 {-| -}
 u1 : String -> Attribute msg
 u1 =
-    VirtualDom.Types.Attribute "u1"
+    VirtualDom.Types.Attribute False "u1"
 
 
 {-| -}
 u2 : String -> Attribute msg
 u2 =
-    VirtualDom.Types.Attribute "u2"
+    VirtualDom.Types.Attribute False "u2"
 
 
 {-| -}
 underlinePosition : String -> Attribute msg
 underlinePosition =
-    VirtualDom.Types.Attribute "underline-position"
+    VirtualDom.Types.Attribute False "underline-position"
 
 
 {-| -}
 underlineThickness : String -> Attribute msg
 underlineThickness =
-    VirtualDom.Types.Attribute "underline-thickness"
+    VirtualDom.Types.Attribute False "underline-thickness"
 
 
 {-| -}
 unicode : String -> Attribute msg
 unicode =
-    VirtualDom.Types.Attribute "unicode"
+    VirtualDom.Types.Attribute False "unicode"
 
 
 {-| -}
 unicodeRange : String -> Attribute msg
 unicodeRange =
-    VirtualDom.Types.Attribute "unicode-range"
+    VirtualDom.Types.Attribute False "unicode-range"
 
 
 {-| -}
 unitsPerEm : String -> Attribute msg
 unitsPerEm =
-    VirtualDom.Types.Attribute "units-per-em"
+    VirtualDom.Types.Attribute False "units-per-em"
 
 
 {-| -}
 vAlphabetic : String -> Attribute msg
 vAlphabetic =
-    VirtualDom.Types.Attribute "v-alphabetic"
+    VirtualDom.Types.Attribute False "v-alphabetic"
 
 
 {-| -}
 vHanging : String -> Attribute msg
 vHanging =
-    VirtualDom.Types.Attribute "v-hanging"
+    VirtualDom.Types.Attribute False "v-hanging"
 
 
 {-| -}
 vIdeographic : String -> Attribute msg
 vIdeographic =
-    VirtualDom.Types.Attribute "v-ideographic"
+    VirtualDom.Types.Attribute False "v-ideographic"
 
 
 {-| -}
 vMathematical : String -> Attribute msg
 vMathematical =
-    VirtualDom.Types.Attribute "v-mathematical"
+    VirtualDom.Types.Attribute False "v-mathematical"
 
 
 {-| -}
 values : String -> Attribute msg
 values value =
-    VirtualDom.Types.Attribute "values" value
+    VirtualDom.Types.Attribute False "values" value
 
 
 {-| -}
 version : String -> Attribute msg
 version =
-    VirtualDom.Types.Attribute "version"
+    VirtualDom.Types.Attribute False "version"
 
 
 {-| -}
 vertAdvY : String -> Attribute msg
 vertAdvY =
-    VirtualDom.Types.Attribute "vert-adv-y"
+    VirtualDom.Types.Attribute False "vert-adv-y"
 
 
 {-| -}
 vertOriginX : String -> Attribute msg
 vertOriginX =
-    VirtualDom.Types.Attribute "vert-origin-x"
+    VirtualDom.Types.Attribute False "vert-origin-x"
 
 
 {-| -}
 vertOriginY : String -> Attribute msg
 vertOriginY =
-    VirtualDom.Types.Attribute "vert-origin-y"
+    VirtualDom.Types.Attribute False "vert-origin-y"
 
 
 {-| -}
 viewBox : String -> Attribute msg
 viewBox =
-    VirtualDom.Types.Attribute "viewBox"
+    VirtualDom.Types.Attribute False "viewBox"
 
 
 {-| -}
 viewTarget : String -> Attribute msg
 viewTarget =
-    VirtualDom.Types.Attribute "viewTarget"
+    VirtualDom.Types.Attribute False "viewTarget"
 
 
 {-| -}
 width : String -> Attribute msg
 width =
-    VirtualDom.Types.Attribute "width"
+    VirtualDom.Types.Attribute False "width"
 
 
 {-| -}
 widths : String -> Attribute msg
 widths =
-    VirtualDom.Types.Attribute "widths"
+    VirtualDom.Types.Attribute False "widths"
 
 
 {-| -}
 x : String -> Attribute msg
 x =
-    VirtualDom.Types.Attribute "x"
+    VirtualDom.Types.Attribute False "x"
 
 
 {-| -}
 xHeight : String -> Attribute msg
 xHeight =
-    VirtualDom.Types.Attribute "x-height"
+    VirtualDom.Types.Attribute False "x-height"
 
 
 {-| -}
 x1 : String -> Attribute msg
 x1 =
-    VirtualDom.Types.Attribute "x1"
+    VirtualDom.Types.Attribute False "x1"
 
 
 {-| -}
 x2 : String -> Attribute msg
 x2 =
-    VirtualDom.Types.Attribute "x2"
+    VirtualDom.Types.Attribute False "x2"
 
 
 {-| -}
 xChannelSelector : String -> Attribute msg
 xChannelSelector =
-    VirtualDom.Types.Attribute "xChannelSelector"
+    VirtualDom.Types.Attribute False "xChannelSelector"
 
 
 {-| -}
 xlinkActuate : String -> Attribute msg
 xlinkActuate =
-    VirtualDom.Types.AttributeNS "http://www.w3.org/1999/xlink" "xlink:actuate"
+    VirtualDom.Types.AttributeNS False "http://www.w3.org/1999/xlink" "xlink:actuate"
 
 
 {-| -}
 xlinkArcrole : String -> Attribute msg
 xlinkArcrole =
-    VirtualDom.Types.AttributeNS "http://www.w3.org/1999/xlink" "xlink:arcrole"
+    VirtualDom.Types.AttributeNS False "http://www.w3.org/1999/xlink" "xlink:arcrole"
 
 
 {-| -}
 xlinkHref : String -> Attribute msg
 xlinkHref value =
-    VirtualDom.Types.AttributeNS "http://www.w3.org/1999/xlink" "xlink:href" value
+    VirtualDom.Types.AttributeNS False "http://www.w3.org/1999/xlink" "xlink:href" value
 
 
 {-| -}
 xlinkRole : String -> Attribute msg
 xlinkRole =
-    VirtualDom.Types.AttributeNS "http://www.w3.org/1999/xlink" "xlink:role"
+    VirtualDom.Types.AttributeNS False "http://www.w3.org/1999/xlink" "xlink:role"
 
 
 {-| -}
 xlinkShow : String -> Attribute msg
 xlinkShow =
-    VirtualDom.Types.AttributeNS "http://www.w3.org/1999/xlink" "xlink:show"
+    VirtualDom.Types.AttributeNS False "http://www.w3.org/1999/xlink" "xlink:show"
 
 
 {-| -}
 xlinkTitle : String -> Attribute msg
 xlinkTitle =
-    VirtualDom.Types.AttributeNS "http://www.w3.org/1999/xlink" "xlink:title"
+    VirtualDom.Types.AttributeNS False "http://www.w3.org/1999/xlink" "xlink:title"
 
 
 {-| -}
 xlinkType : String -> Attribute msg
 xlinkType =
-    VirtualDom.Types.AttributeNS "http://www.w3.org/1999/xlink" "xlink:type"
+    VirtualDom.Types.AttributeNS False "http://www.w3.org/1999/xlink" "xlink:type"
 
 
 {-| -}
 xmlBase : String -> Attribute msg
 xmlBase =
-    VirtualDom.Types.AttributeNS "http://www.w3.org/XML/1998/namespace" "xml:base"
+    VirtualDom.Types.AttributeNS False "http://www.w3.org/XML/1998/namespace" "xml:base"
 
 
 {-| -}
 xmlLang : String -> Attribute msg
 xmlLang =
-    VirtualDom.Types.AttributeNS "http://www.w3.org/XML/1998/namespace" "xml:lang"
+    VirtualDom.Types.AttributeNS False "http://www.w3.org/XML/1998/namespace" "xml:lang"
 
 
 {-| -}
 xmlSpace : String -> Attribute msg
 xmlSpace =
-    VirtualDom.Types.AttributeNS "http://www.w3.org/XML/1998/namespace" "xml:space"
+    VirtualDom.Types.AttributeNS False "http://www.w3.org/XML/1998/namespace" "xml:space"
 
 
 {-| -}
 y : String -> Attribute msg
 y =
-    VirtualDom.Types.Attribute "y"
+    VirtualDom.Types.Attribute False "y"
 
 
 {-| -}
 y1 : String -> Attribute msg
 y1 =
-    VirtualDom.Types.Attribute "y1"
+    VirtualDom.Types.Attribute False "y1"
 
 
 {-| -}
 y2 : String -> Attribute msg
 y2 =
-    VirtualDom.Types.Attribute "y2"
+    VirtualDom.Types.Attribute False "y2"
 
 
 {-| -}
 yChannelSelector : String -> Attribute msg
 yChannelSelector =
-    VirtualDom.Types.Attribute "yChannelSelector"
+    VirtualDom.Types.Attribute False "yChannelSelector"
 
 
 {-| -}
 z : String -> Attribute msg
 z =
-    VirtualDom.Types.Attribute "z"
+    VirtualDom.Types.Attribute False "z"
 
 
 {-| -}
 zoomAndPan : String -> Attribute msg
 zoomAndPan =
-    VirtualDom.Types.Attribute "zoomAndPan"
+    VirtualDom.Types.Attribute False "zoomAndPan"
 
 
 
@@ -1272,352 +1272,352 @@ zoomAndPan =
 {-| -}
 alignmentBaseline : String -> Attribute msg
 alignmentBaseline =
-    VirtualDom.Types.Attribute "alignment-baseline"
+    VirtualDom.Types.Attribute False "alignment-baseline"
 
 
 {-| -}
 baselineShift : String -> Attribute msg
 baselineShift =
-    VirtualDom.Types.Attribute "baseline-shift"
+    VirtualDom.Types.Attribute False "baseline-shift"
 
 
 {-| -}
 clipPath : String -> Attribute msg
 clipPath =
-    VirtualDom.Types.Attribute "clip-path"
+    VirtualDom.Types.Attribute False "clip-path"
 
 
 {-| -}
 clipRule : String -> Attribute msg
 clipRule =
-    VirtualDom.Types.Attribute "clip-rule"
+    VirtualDom.Types.Attribute False "clip-rule"
 
 
 {-| -}
 clip : String -> Attribute msg
 clip =
-    VirtualDom.Types.Attribute "clip"
+    VirtualDom.Types.Attribute False "clip"
 
 
 {-| -}
 colorInterpolationFilters : String -> Attribute msg
 colorInterpolationFilters =
-    VirtualDom.Types.Attribute "color-interpolation-filters"
+    VirtualDom.Types.Attribute False "color-interpolation-filters"
 
 
 {-| -}
 colorInterpolation : String -> Attribute msg
 colorInterpolation =
-    VirtualDom.Types.Attribute "color-interpolation"
+    VirtualDom.Types.Attribute False "color-interpolation"
 
 
 {-| -}
 colorProfile : String -> Attribute msg
 colorProfile =
-    VirtualDom.Types.Attribute "color-profile"
+    VirtualDom.Types.Attribute False "color-profile"
 
 
 {-| -}
 colorRendering : String -> Attribute msg
 colorRendering =
-    VirtualDom.Types.Attribute "color-rendering"
+    VirtualDom.Types.Attribute False "color-rendering"
 
 
 {-| -}
 color : String -> Attribute msg
 color =
-    VirtualDom.Types.Attribute "color"
+    VirtualDom.Types.Attribute False "color"
 
 
 {-| -}
 cursor : String -> Attribute msg
 cursor =
-    VirtualDom.Types.Attribute "cursor"
+    VirtualDom.Types.Attribute False "cursor"
 
 
 {-| -}
 direction : String -> Attribute msg
 direction =
-    VirtualDom.Types.Attribute "direction"
+    VirtualDom.Types.Attribute False "direction"
 
 
 {-| -}
 display : String -> Attribute msg
 display =
-    VirtualDom.Types.Attribute "display"
+    VirtualDom.Types.Attribute False "display"
 
 
 {-| -}
 dominantBaseline : String -> Attribute msg
 dominantBaseline =
-    VirtualDom.Types.Attribute "dominant-baseline"
+    VirtualDom.Types.Attribute False "dominant-baseline"
 
 
 {-| -}
 enableBackground : String -> Attribute msg
 enableBackground =
-    VirtualDom.Types.Attribute "enable-background"
+    VirtualDom.Types.Attribute False "enable-background"
 
 
 {-| -}
 fillOpacity : String -> Attribute msg
 fillOpacity =
-    VirtualDom.Types.Attribute "fill-opacity"
+    VirtualDom.Types.Attribute False "fill-opacity"
 
 
 {-| -}
 fillRule : String -> Attribute msg
 fillRule =
-    VirtualDom.Types.Attribute "fill-rule"
+    VirtualDom.Types.Attribute False "fill-rule"
 
 
 {-| -}
 fill : String -> Attribute msg
 fill =
-    VirtualDom.Types.Attribute "fill"
+    VirtualDom.Types.Attribute False "fill"
 
 
 {-| -}
 filter : String -> Attribute msg
 filter =
-    VirtualDom.Types.Attribute "filter"
+    VirtualDom.Types.Attribute False "filter"
 
 
 {-| -}
 floodColor : String -> Attribute msg
 floodColor =
-    VirtualDom.Types.Attribute "flood-color"
+    VirtualDom.Types.Attribute False "flood-color"
 
 
 {-| -}
 floodOpacity : String -> Attribute msg
 floodOpacity =
-    VirtualDom.Types.Attribute "flood-opacity"
+    VirtualDom.Types.Attribute False "flood-opacity"
 
 
 {-| -}
 fontFamily : String -> Attribute msg
 fontFamily =
-    VirtualDom.Types.Attribute "font-family"
+    VirtualDom.Types.Attribute False "font-family"
 
 
 {-| -}
 fontSizeAdjust : String -> Attribute msg
 fontSizeAdjust =
-    VirtualDom.Types.Attribute "font-size-adjust"
+    VirtualDom.Types.Attribute False "font-size-adjust"
 
 
 {-| -}
 fontSize : String -> Attribute msg
 fontSize =
-    VirtualDom.Types.Attribute "font-size"
+    VirtualDom.Types.Attribute False "font-size"
 
 
 {-| -}
 fontStretch : String -> Attribute msg
 fontStretch =
-    VirtualDom.Types.Attribute "font-stretch"
+    VirtualDom.Types.Attribute False "font-stretch"
 
 
 {-| -}
 fontStyle : String -> Attribute msg
 fontStyle =
-    VirtualDom.Types.Attribute "font-style"
+    VirtualDom.Types.Attribute False "font-style"
 
 
 {-| -}
 fontVariant : String -> Attribute msg
 fontVariant =
-    VirtualDom.Types.Attribute "font-variant"
+    VirtualDom.Types.Attribute False "font-variant"
 
 
 {-| -}
 fontWeight : String -> Attribute msg
 fontWeight =
-    VirtualDom.Types.Attribute "font-weight"
+    VirtualDom.Types.Attribute False "font-weight"
 
 
 {-| -}
 glyphOrientationHorizontal : String -> Attribute msg
 glyphOrientationHorizontal =
-    VirtualDom.Types.Attribute "glyph-orientation-horizontal"
+    VirtualDom.Types.Attribute False "glyph-orientation-horizontal"
 
 
 {-| -}
 glyphOrientationVertical : String -> Attribute msg
 glyphOrientationVertical =
-    VirtualDom.Types.Attribute "glyph-orientation-vertical"
+    VirtualDom.Types.Attribute False "glyph-orientation-vertical"
 
 
 {-| -}
 imageRendering : String -> Attribute msg
 imageRendering =
-    VirtualDom.Types.Attribute "image-rendering"
+    VirtualDom.Types.Attribute False "image-rendering"
 
 
 {-| -}
 kerning : String -> Attribute msg
 kerning =
-    VirtualDom.Types.Attribute "kerning"
+    VirtualDom.Types.Attribute False "kerning"
 
 
 {-| -}
 letterSpacing : String -> Attribute msg
 letterSpacing =
-    VirtualDom.Types.Attribute "letter-spacing"
+    VirtualDom.Types.Attribute False "letter-spacing"
 
 
 {-| -}
 lightingColor : String -> Attribute msg
 lightingColor =
-    VirtualDom.Types.Attribute "lighting-color"
+    VirtualDom.Types.Attribute False "lighting-color"
 
 
 {-| -}
 markerEnd : String -> Attribute msg
 markerEnd =
-    VirtualDom.Types.Attribute "marker-end"
+    VirtualDom.Types.Attribute False "marker-end"
 
 
 {-| -}
 markerMid : String -> Attribute msg
 markerMid =
-    VirtualDom.Types.Attribute "marker-mid"
+    VirtualDom.Types.Attribute False "marker-mid"
 
 
 {-| -}
 markerStart : String -> Attribute msg
 markerStart =
-    VirtualDom.Types.Attribute "marker-start"
+    VirtualDom.Types.Attribute False "marker-start"
 
 
 {-| -}
 mask : String -> Attribute msg
 mask =
-    VirtualDom.Types.Attribute "mask"
+    VirtualDom.Types.Attribute False "mask"
 
 
 {-| -}
 opacity : String -> Attribute msg
 opacity =
-    VirtualDom.Types.Attribute "opacity"
+    VirtualDom.Types.Attribute False "opacity"
 
 
 {-| -}
 overflow : String -> Attribute msg
 overflow =
-    VirtualDom.Types.Attribute "overflow"
+    VirtualDom.Types.Attribute False "overflow"
 
 
 {-| -}
 pointerEvents : String -> Attribute msg
 pointerEvents =
-    VirtualDom.Types.Attribute "pointer-events"
+    VirtualDom.Types.Attribute False "pointer-events"
 
 
 {-| -}
 shapeRendering : String -> Attribute msg
 shapeRendering =
-    VirtualDom.Types.Attribute "shape-rendering"
+    VirtualDom.Types.Attribute False "shape-rendering"
 
 
 {-| -}
 stopColor : String -> Attribute msg
 stopColor =
-    VirtualDom.Types.Attribute "stop-color"
+    VirtualDom.Types.Attribute False "stop-color"
 
 
 {-| -}
 stopOpacity : String -> Attribute msg
 stopOpacity =
-    VirtualDom.Types.Attribute "stop-opacity"
+    VirtualDom.Types.Attribute False "stop-opacity"
 
 
 {-| -}
 strokeDasharray : String -> Attribute msg
 strokeDasharray =
-    VirtualDom.Types.Attribute "stroke-dasharray"
+    VirtualDom.Types.Attribute False "stroke-dasharray"
 
 
 {-| -}
 strokeDashoffset : String -> Attribute msg
 strokeDashoffset =
-    VirtualDom.Types.Attribute "stroke-dashoffset"
+    VirtualDom.Types.Attribute False "stroke-dashoffset"
 
 
 {-| -}
 strokeLinecap : String -> Attribute msg
 strokeLinecap =
-    VirtualDom.Types.Attribute "stroke-linecap"
+    VirtualDom.Types.Attribute False "stroke-linecap"
 
 
 {-| -}
 strokeLinejoin : String -> Attribute msg
 strokeLinejoin =
-    VirtualDom.Types.Attribute "stroke-linejoin"
+    VirtualDom.Types.Attribute False "stroke-linejoin"
 
 
 {-| -}
 strokeMiterlimit : String -> Attribute msg
 strokeMiterlimit =
-    VirtualDom.Types.Attribute "stroke-miterlimit"
+    VirtualDom.Types.Attribute False "stroke-miterlimit"
 
 
 {-| -}
 strokeOpacity : String -> Attribute msg
 strokeOpacity =
-    VirtualDom.Types.Attribute "stroke-opacity"
+    VirtualDom.Types.Attribute False "stroke-opacity"
 
 
 {-| -}
 strokeWidth : String -> Attribute msg
 strokeWidth =
-    VirtualDom.Types.Attribute "stroke-width"
+    VirtualDom.Types.Attribute False "stroke-width"
 
 
 {-| -}
 stroke : String -> Attribute msg
 stroke =
-    VirtualDom.Types.Attribute "stroke"
+    VirtualDom.Types.Attribute False "stroke"
 
 
 {-| -}
 textAnchor : String -> Attribute msg
 textAnchor =
-    VirtualDom.Types.Attribute "text-anchor"
+    VirtualDom.Types.Attribute False "text-anchor"
 
 
 {-| -}
 textDecoration : String -> Attribute msg
 textDecoration =
-    VirtualDom.Types.Attribute "text-decoration"
+    VirtualDom.Types.Attribute False "text-decoration"
 
 
 {-| -}
 textRendering : String -> Attribute msg
 textRendering =
-    VirtualDom.Types.Attribute "text-rendering"
+    VirtualDom.Types.Attribute False "text-rendering"
 
 
 {-| -}
 unicodeBidi : String -> Attribute msg
 unicodeBidi =
-    VirtualDom.Types.Attribute "unicode-bidi"
+    VirtualDom.Types.Attribute False "unicode-bidi"
 
 
 {-| -}
 visibility : String -> Attribute msg
 visibility =
-    VirtualDom.Types.Attribute "visibility"
+    VirtualDom.Types.Attribute False "visibility"
 
 
 {-| -}
 wordSpacing : String -> Attribute msg
 wordSpacing =
-    VirtualDom.Types.Attribute "word-spacing"
+    VirtualDom.Types.Attribute False "word-spacing"
 
 
 {-| -}
 writingMode : String -> Attribute msg
 writingMode =
-    VirtualDom.Types.Attribute "writing-mode"
+    VirtualDom.Types.Attribute False "writing-mode"

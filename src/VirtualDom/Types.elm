@@ -56,8 +56,8 @@ map f node =
 
 
 type Attribute msg
-    = Attribute String String
-    | AttributeNS String String String
+    = Attribute Bool String String
+    | AttributeNS Bool String String String
     | StringProperty String String
     | BoolProperty String Bool
     | ValueProperty String Value
@@ -75,11 +75,11 @@ type EventDecoder msg
 mapAttribute : (a -> b) -> Attribute a -> Attribute b
 mapAttribute f attribute =
     case attribute of
-        Attribute key value ->
-            Attribute key value
+        Attribute shouldHypenate key value ->
+            Attribute shouldHypenate key value
 
-        AttributeNS namespace key value ->
-            AttributeNS namespace key value
+        AttributeNS shouldHypenate namespace key value ->
+            AttributeNS shouldHypenate namespace key value
 
         StringProperty key value ->
             StringProperty key value
@@ -160,7 +160,7 @@ attributeToNode attribute =
        we cannot call the Kernel functions in a regular elm package.
     -}
     case attribute of
-        Attribute key value ->
+        Attribute _ key value ->
             case key of
                 "from" ->
                     Svg.Attributes.from value
@@ -177,7 +177,7 @@ attributeToNode attribute =
                 _ ->
                     VirtualDom.attribute key value
 
-        AttributeNS namespace key value ->
+        AttributeNS _ namespace key value ->
             case key of
                 "xlink:href" ->
                     Svg.Attributes.xlinkHref value
@@ -314,12 +314,6 @@ toStringHelper indenter tags acc =
                         }
 
         (NodeNS namespace tagName attributes children) :: rest ->
-            let
-                attributesWithNamespace =
-                    attributes
-
-                -- StringProperty "xml:space" namespace :: attributes
-            in
             case children of
                 NoChildren ->
                     toStringHelper indenter
@@ -380,7 +374,7 @@ withClasses classes attrs =
             attrs
 
         _ ->
-            buildProp "class" (join " " classes) :: attrs
+            buildProp True "class" (join " " classes) :: attrs
 
 
 withStyles : List String -> List String -> List String
@@ -390,7 +384,7 @@ withStyles styles attrs =
             attrs
 
         _ ->
-            buildProp "style" (join "; " styles) :: attrs
+            buildProp True "style" (join "; " styles) :: attrs
 
 
 type alias AttrAcc =
@@ -413,25 +407,29 @@ propName prop =
             prop
 
 
-buildProp : String -> String -> String
-buildProp key value =
-    hyphenate key ++ "=\"" ++ escape value ++ "\""
+buildProp : Bool -> String -> String -> String
+buildProp shouldHypenate key value =
+    if shouldHypenate then
+        hyphenate key ++ "=\"" ++ escape value ++ "\""
+
+    else
+        key ++ "=\"" ++ escape value ++ "\""
 
 
 addAttribute : Attribute msg -> AttrAcc -> AttrAcc
 addAttribute attribute (( classes, styles, attrs ) as acc) =
     case attribute of
-        Attribute "class" value ->
+        Attribute _ "class" value ->
             ( value :: classes
             , styles
             , attrs
             )
 
-        Attribute key value ->
-            ( classes, styles, buildProp key value :: attrs )
+        Attribute shouldHypenate key value ->
+            ( classes, styles, buildProp shouldHypenate key value :: attrs )
 
-        AttributeNS namespace key value ->
-            ( classes, styles, buildProp key value :: attrs )
+        AttributeNS shouldHypenate namespace key value ->
+            ( classes, styles, buildProp shouldHypenate key value :: attrs )
 
         StringProperty "className" value ->
             ( value :: classes
@@ -440,7 +438,7 @@ addAttribute attribute (( classes, styles, attrs ) as acc) =
             )
 
         StringProperty string value ->
-            ( classes, styles, buildProp (propName string) value :: attrs )
+            ( classes, styles, buildProp True (propName string) value :: attrs )
 
         BoolProperty string enabled ->
             if enabled then
@@ -452,7 +450,7 @@ addAttribute attribute (( classes, styles, attrs ) as acc) =
         ValueProperty string value ->
             ( classes
             , styles
-            , buildProp (propName string) (String.Conversions.fromValue value) :: attrs
+            , buildProp True (propName string) (String.Conversions.fromValue value) :: attrs
             )
 
         Style key value ->
