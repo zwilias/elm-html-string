@@ -134,6 +134,11 @@ nodeWithoutChildren tag attrs _ =
     Node tag attrs NoChildren
 
 
+trustedNode : String -> List (Attribute msg) -> List (Svg msg) -> Svg msg
+trustedNode tag attributes children =
+    NodeNS "http://www.w3.org/2000/svg" tag attributes (Regular children)
+
+
 {-| A simple text node, no tags at all.
 
 Warning: not to be confused with `text_` which produces the SVG `<text>` tag!
@@ -200,13 +205,13 @@ containing a rounded rectangle:
 -}
 svg : List (Attribute msg) -> List (Svg msg) -> Html.String.Html msg
 svg =
-    node "svg"
+    trustedNode "svg"
 
 
 {-| -}
 foreignObject : List (Attribute msg) -> List (Html.String.Html msg) -> Html.String.Html msg
 foreignObject =
-    node "foreignObject"
+    trustedNode "foreignObject"
 
 
 
@@ -216,37 +221,37 @@ foreignObject =
 {-| -}
 animate : List (Attribute msg) -> List (Svg msg) -> Svg msg
 animate =
-    node "animate"
+    trustedNode "animate"
 
 
 {-| -}
 animateColor : List (Attribute msg) -> List (Svg msg) -> Svg msg
 animateColor =
-    node "animateColor"
+    trustedNode "animateColor"
 
 
 {-| -}
 animateMotion : List (Attribute msg) -> List (Svg msg) -> Svg msg
 animateMotion =
-    node "animateMotion"
+    trustedNode "animateMotion"
 
 
 {-| -}
 animateTransform : List (Attribute msg) -> List (Svg msg) -> Svg msg
 animateTransform =
-    node "animateTransform"
+    trustedNode "animateTransform"
 
 
 {-| -}
 mpath : List (Attribute msg) -> List (Svg msg) -> Svg msg
 mpath =
-    node "mpath"
+    trustedNode "mpath"
 
 
 {-| -}
 set : List (Attribute msg) -> List (Svg msg) -> Svg msg
 set =
-    node "set"
+    trustedNode "set"
 
 
 
@@ -257,49 +262,49 @@ set =
 -}
 a : List (Attribute msg) -> List (Svg msg) -> Svg msg
 a =
-    node "a"
+    trustedNode "a"
 
 
 {-| -}
 defs : List (Attribute msg) -> List (Svg msg) -> Svg msg
 defs =
-    node "defs"
+    trustedNode "defs"
 
 
 {-| -}
 g : List (Attribute msg) -> List (Svg msg) -> Svg msg
 g =
-    node "g"
+    trustedNode "g"
 
 
 {-| -}
 marker : List (Attribute msg) -> List (Svg msg) -> Svg msg
 marker =
-    node "marker"
+    trustedNode "marker"
 
 
 {-| -}
 mask : List (Attribute msg) -> List (Svg msg) -> Svg msg
 mask =
-    node "mask"
+    trustedNode "mask"
 
 
 {-| -}
 pattern : List (Attribute msg) -> List (Svg msg) -> Svg msg
 pattern =
-    node "pattern"
+    trustedNode "pattern"
 
 
 {-| -}
 switch : List (Attribute msg) -> List (Svg msg) -> Svg msg
 switch =
-    node "switch"
+    trustedNode "switch"
 
 
 {-| -}
 symbol : List (Attribute msg) -> List (Svg msg) -> Svg msg
 symbol =
-    node "symbol"
+    trustedNode "symbol"
 
 
 
@@ -309,19 +314,19 @@ symbol =
 {-| -}
 desc : List (Attribute msg) -> List (Svg msg) -> Svg msg
 desc =
-    node "desc"
+    trustedNode "desc"
 
 
 {-| -}
 metadata : List (Attribute msg) -> List (Svg msg) -> Svg msg
 metadata =
-    node "metadata"
+    trustedNode "metadata"
 
 
 {-| -}
 title : List (Attribute msg) -> List (Svg msg) -> Svg msg
 title =
-    node "title"
+    trustedNode "title"
 
 
 
@@ -331,127 +336,127 @@ title =
 {-| -}
 feBlend : List (Attribute msg) -> List (Svg msg) -> Svg msg
 feBlend =
-    node "feBlend"
+    trustedNode "feBlend"
 
 
 {-| -}
 feColorMatrix : List (Attribute msg) -> List (Svg msg) -> Svg msg
 feColorMatrix =
-    node "feColorMatrix"
+    trustedNode "feColorMatrix"
 
 
 {-| -}
 feComponentTransfer : List (Attribute msg) -> List (Svg msg) -> Svg msg
 feComponentTransfer =
-    node "feComponentTransfer"
+    trustedNode "feComponentTransfer"
 
 
 {-| -}
 feComposite : List (Attribute msg) -> List (Svg msg) -> Svg msg
 feComposite =
-    node "feComposite"
+    trustedNode "feComposite"
 
 
 {-| -}
 feConvolveMatrix : List (Attribute msg) -> List (Svg msg) -> Svg msg
 feConvolveMatrix =
-    node "feConvolveMatrix"
+    trustedNode "feConvolveMatrix"
 
 
 {-| -}
 feDiffuseLighting : List (Attribute msg) -> List (Svg msg) -> Svg msg
 feDiffuseLighting =
-    node "feDiffuseLighting"
+    trustedNode "feDiffuseLighting"
 
 
 {-| -}
 feDisplacementMap : List (Attribute msg) -> List (Svg msg) -> Svg msg
 feDisplacementMap =
-    node "feDisplacementMap"
+    trustedNode "feDisplacementMap"
 
 
 {-| -}
 feFlood : List (Attribute msg) -> List (Svg msg) -> Svg msg
 feFlood =
-    node "feFlood"
+    trustedNode "feFlood"
 
 
 {-| -}
 feFuncA : List (Attribute msg) -> List (Svg msg) -> Svg msg
 feFuncA =
-    node "feFuncA"
+    trustedNode "feFuncA"
 
 
 {-| -}
 feFuncB : List (Attribute msg) -> List (Svg msg) -> Svg msg
 feFuncB =
-    node "feFuncB"
+    trustedNode "feFuncB"
 
 
 {-| -}
 feFuncG : List (Attribute msg) -> List (Svg msg) -> Svg msg
 feFuncG =
-    node "feFuncG"
+    trustedNode "feFuncG"
 
 
 {-| -}
 feFuncR : List (Attribute msg) -> List (Svg msg) -> Svg msg
 feFuncR =
-    node "feFuncR"
+    trustedNode "feFuncR"
 
 
 {-| -}
 feGaussianBlur : List (Attribute msg) -> List (Svg msg) -> Svg msg
 feGaussianBlur =
-    node "feGaussianBlur"
+    trustedNode "feGaussianBlur"
 
 
 {-| -}
 feImage : List (Attribute msg) -> List (Svg msg) -> Svg msg
 feImage =
-    node "feImage"
+    trustedNode "feImage"
 
 
 {-| -}
 feMerge : List (Attribute msg) -> List (Svg msg) -> Svg msg
 feMerge =
-    node "feMerge"
+    trustedNode "feMerge"
 
 
 {-| -}
 feMergeNode : List (Attribute msg) -> List (Svg msg) -> Svg msg
 feMergeNode =
-    node "feMergeNode"
+    trustedNode "feMergeNode"
 
 
 {-| -}
 feMorphology : List (Attribute msg) -> List (Svg msg) -> Svg msg
 feMorphology =
-    node "feMorphology"
+    trustedNode "feMorphology"
 
 
 {-| -}
 feOffset : List (Attribute msg) -> List (Svg msg) -> Svg msg
 feOffset =
-    node "feOffset"
+    trustedNode "feOffset"
 
 
 {-| -}
 feSpecularLighting : List (Attribute msg) -> List (Svg msg) -> Svg msg
 feSpecularLighting =
-    node "feSpecularLighting"
+    trustedNode "feSpecularLighting"
 
 
 {-| -}
 feTile : List (Attribute msg) -> List (Svg msg) -> Svg msg
 feTile =
-    node "feTile"
+    trustedNode "feTile"
 
 
 {-| -}
 feTurbulence : List (Attribute msg) -> List (Svg msg) -> Svg msg
 feTurbulence =
-    node "feTurbulence"
+    trustedNode "feTurbulence"
 
 
 
@@ -461,7 +466,7 @@ feTurbulence =
 {-| -}
 font : List (Attribute msg) -> List (Svg msg) -> Svg msg
 font =
-    node "font"
+    trustedNode "font"
 
 
 
@@ -471,19 +476,19 @@ font =
 {-| -}
 linearGradient : List (Attribute msg) -> List (Svg msg) -> Svg msg
 linearGradient =
-    node "linearGradient"
+    trustedNode "linearGradient"
 
 
 {-| -}
 radialGradient : List (Attribute msg) -> List (Svg msg) -> Svg msg
 radialGradient =
-    node "radialGradient"
+    trustedNode "radialGradient"
 
 
 {-| -}
 stop : List (Attribute msg) -> List (Svg msg) -> Svg msg
 stop =
-    node "stop"
+    trustedNode "stop"
 
 
 
@@ -498,37 +503,37 @@ a center point and a radius.
 -}
 circle : List (Attribute msg) -> List (Svg msg) -> Svg msg
 circle =
-    node "circle"
+    trustedNode "circle"
 
 
 {-| -}
 ellipse : List (Attribute msg) -> List (Svg msg) -> Svg msg
 ellipse =
-    node "ellipse"
+    trustedNode "ellipse"
 
 
 {-| -}
 image : List (Attribute msg) -> List (Svg msg) -> Svg msg
 image =
-    node "image"
+    trustedNode "image"
 
 
 {-| -}
 line : List (Attribute msg) -> List (Svg msg) -> Svg msg
 line =
-    node "line"
+    trustedNode "line"
 
 
 {-| -}
 path : List (Attribute msg) -> List (Svg msg) -> Svg msg
 path =
-    node "path"
+    trustedNode "path"
 
 
 {-| -}
 polygon : List (Attribute msg) -> List (Svg msg) -> Svg msg
 polygon =
-    node "polygon"
+    trustedNode "polygon"
 
 
 {-| The polyline element is an SVG basic shape, used to create a series of
@@ -540,19 +545,19 @@ create open shapes.
 -}
 polyline : List (Attribute msg) -> List (Svg msg) -> Svg msg
 polyline =
-    node "polyline"
+    trustedNode "polyline"
 
 
 {-| -}
 rect : List (Attribute msg) -> List (Svg msg) -> Svg msg
 rect =
-    node "rect"
+    trustedNode "rect"
 
 
 {-| -}
 use : List (Attribute msg) -> List (Svg msg) -> Svg msg
 use =
-    node "use"
+    trustedNode "use"
 
 
 
@@ -562,19 +567,19 @@ use =
 {-| -}
 feDistantLight : List (Attribute msg) -> List (Svg msg) -> Svg msg
 feDistantLight =
-    node "feDistantLight"
+    trustedNode "feDistantLight"
 
 
 {-| -}
 fePointLight : List (Attribute msg) -> List (Svg msg) -> Svg msg
 fePointLight =
-    node "fePointLight"
+    trustedNode "fePointLight"
 
 
 {-| -}
 feSpotLight : List (Attribute msg) -> List (Svg msg) -> Svg msg
 feSpotLight =
-    node "feSpotLight"
+    trustedNode "feSpotLight"
 
 
 
@@ -584,55 +589,55 @@ feSpotLight =
 {-| -}
 altGlyph : List (Attribute msg) -> List (Svg msg) -> Svg msg
 altGlyph =
-    node "altGlyph"
+    trustedNode "altGlyph"
 
 
 {-| -}
 altGlyphDef : List (Attribute msg) -> List (Svg msg) -> Svg msg
 altGlyphDef =
-    node "altGlyphDef"
+    trustedNode "altGlyphDef"
 
 
 {-| -}
 altGlyphItem : List (Attribute msg) -> List (Svg msg) -> Svg msg
 altGlyphItem =
-    node "altGlyphItem"
+    trustedNode "altGlyphItem"
 
 
 {-| -}
 glyph : List (Attribute msg) -> List (Svg msg) -> Svg msg
 glyph =
-    node "glyph"
+    trustedNode "glyph"
 
 
 {-| -}
 glyphRef : List (Attribute msg) -> List (Svg msg) -> Svg msg
 glyphRef =
-    node "glyphRef"
+    trustedNode "glyphRef"
 
 
 {-| -}
 textPath : List (Attribute msg) -> List (Svg msg) -> Svg msg
 textPath =
-    node "textPath"
+    trustedNode "textPath"
 
 
 {-| -}
 text_ : List (Attribute msg) -> List (Svg msg) -> Svg msg
 text_ =
-    node "text"
+    trustedNode "text"
 
 
 {-| -}
 tref : List (Attribute msg) -> List (Svg msg) -> Svg msg
 tref =
-    node "tref"
+    trustedNode "tref"
 
 
 {-| -}
 tspan : List (Attribute msg) -> List (Svg msg) -> Svg msg
 tspan =
-    node "tspan"
+    trustedNode "tspan"
 
 
 
@@ -642,34 +647,34 @@ tspan =
 {-| -}
 clipPath : List (Attribute msg) -> List (Svg msg) -> Svg msg
 clipPath =
-    node "clipPath"
+    trustedNode "clipPath"
 
 
 {-| -}
 colorProfile : List (Attribute msg) -> List (Svg msg) -> Svg msg
 colorProfile =
-    node "colorProfile"
+    trustedNode "colorProfile"
 
 
 {-| -}
 cursor : List (Attribute msg) -> List (Svg msg) -> Svg msg
 cursor =
-    node "cursor"
+    trustedNode "cursor"
 
 
 {-| -}
 filter : List (Attribute msg) -> List (Svg msg) -> Svg msg
 filter =
-    node "filter"
+    trustedNode "filter"
 
 
 {-| -}
 style : List (Attribute msg) -> List (Svg msg) -> Svg msg
 style =
-    node "style"
+    trustedNode "style"
 
 
 {-| -}
 view : List (Attribute msg) -> List (Svg msg) -> Svg msg
 view =
-    node "view"
+    trustedNode "view"

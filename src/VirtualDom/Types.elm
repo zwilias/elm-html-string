@@ -161,17 +161,6 @@ attributeToNode attribute =
     -}
     case attribute of
         Attribute key value ->
-            VirtualDom.attribute key value
-
-        AttributeNS namespace key value ->
-            case key of
-                "xlink:href" ->
-                    Svg.Attributes.xlinkHref value
-
-                _ ->
-                    VirtualDom.attributeNS namespace key value
-
-        StringProperty key value ->
             case key of
                 "from" ->
                     Svg.Attributes.from value
@@ -186,7 +175,18 @@ attributeToNode attribute =
                     Svg.Attributes.by value
 
                 _ ->
-                    VirtualDom.property key (Encode.string value)
+                    VirtualDom.attribute key value
+
+        AttributeNS namespace key value ->
+            case key of
+                "xlink:href" ->
+                    Svg.Attributes.xlinkHref value
+
+                _ ->
+                    VirtualDom.attributeNS namespace key value
+
+        StringProperty key value ->
+            VirtualDom.property key (Encode.string value)
 
         BoolProperty key value ->
             VirtualDom.property key (Encode.bool value)
@@ -316,7 +316,9 @@ toStringHelper indenter tags acc =
         (NodeNS namespace tagName attributes children) :: rest ->
             let
                 attributesWithNamespace =
-                    StringProperty "xml:space" namespace :: attributes
+                    attributes
+
+                -- StringProperty "xml:space" namespace :: attributes
             in
             case children of
                 NoChildren ->
@@ -419,10 +421,15 @@ buildProp key value =
 addAttribute : Attribute msg -> AttrAcc -> AttrAcc
 addAttribute attribute (( classes, styles, attrs ) as acc) =
     case attribute of
+        Attribute "class" value ->
+            ( value :: classes
+            , styles
+            , attrs
+            )
+
         Attribute key value ->
             ( classes, styles, buildProp key value :: attrs )
 
-        -- TODO figure out what namespaced attributes are rendered in raw HTML look like
         AttributeNS namespace key value ->
             ( classes, styles, buildProp key value :: attrs )
 

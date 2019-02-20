@@ -28,6 +28,9 @@ cases =
             ]
       , "<foreignObject>before<br>after</foreignObject>"
       )
+    , ( Svg.svg [ Attr.viewBox "0 0 20 25" ] [ Svg.g [] [] ]
+      , "<svg view-box=\"0 0 20 25\"><g></g></svg>"
+      )
     ]
 
 
