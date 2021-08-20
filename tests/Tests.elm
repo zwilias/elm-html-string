@@ -7,6 +7,7 @@ module Tests exposing
     , nestedIndentation
     , styles
     , testCases
+    , voidTags
     )
 
 import Expect exposing (Expectation)
@@ -38,6 +39,21 @@ testCase html expected =
             html
                 |> Html.toString 0
                 |> Expect.equal expected
+
+
+{-| <https://html.spec.whatwg.org/multipage/syntax.html#void-elements>
+-}
+voidTags : Test
+voidTags =
+    test "void tags do not have a separate closing tag" <|
+        \_ ->
+            Html.img
+                [ Attr.src "example.com/image.png"
+                , Attr.alt "Image description"
+                ]
+                []
+                |> Html.toString 2
+                |> Expect.equal """<img alt="Image description" src="example.com/image.png">"""
 
 
 testCases : Test
